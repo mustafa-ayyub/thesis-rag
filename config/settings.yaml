@@ -1,0 +1,38 @@
+gpu:
+  device: "cuda:0"
+  batch_size_embed: 32
+  batch_size_rerank: 16
+  # Set to "http://localhost:8000" when the SSH tunnel is active (laptop mode).
+  # Leave empty when running directly on the cluster.
+  remote_url: ""
+
+models:
+  embedding: "BAAI/bge-m3"
+  reranker: "BAAI/bge-reranker-v2-m3"
+
+saia:
+  # api_key is injected from SAIA_API_KEY env var at runtime — do not hardcode here
+  api_key: ""
+  base_url: "https://chat-ai.academiccloud.de/v1"
+  model: "qwen3.6-27b"
+  temperature: 0
+  max_tokens: 2048
+
+retrieval:
+  chunk_size_tokens: 512
+  chunk_overlap_tokens: 64
+  hybrid_top_k: 20
+  rerank_top_n: 5
+  rrf_k: 60
+
+qdrant:
+  host: "localhost"
+  port: 6333
+  collection_name: "thesis_corpus"
+  dense_vector_size: 1024
+  sparse_vector_name: "sparse"
+
+data:
+  documents_dir: "data/documents"
+  queries_path: "data/queries/queries.json"
+  results_dir: "data/results/retrieval"

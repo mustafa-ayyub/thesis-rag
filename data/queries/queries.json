@@ -1,0 +1,20 @@
+[
+  {
+    "query_id": "Q001",
+    "query_type": "simple_factual",
+    "question": "What was the ECB's assessment of euro area bank profitability in 2024?",
+    "ground_truth_answer": "...",
+    "relevant_contexts": ["..."],
+    "source_pages": [12],
+    "source_document": "ecb_fsr_may2024.pdf"
+  },
+  {
+    "query_id": "Q002",
+    "query_type": "multi_step",
+    "question": "How did rising interest rates affect both household mortgage stress and bank net interest income simultaneously?",
+    "ground_truth_answer": "...",
+    "relevant_contexts": ["...", "..."],
+    "source_pages": [34, 41],
+    "source_document": "ecb_fsr_nov2023.pdf"
+  }
+]

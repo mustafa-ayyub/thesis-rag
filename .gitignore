@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment
+.env
+
+# Claude Code
+.claude/
+
+# Logs and runtime output
+logs/
+
+# Data — documents and results are large/generated, not versioned
+data/documents/
+data/results/
+
+# OS
+.DS_Store

@@ -1,0 +1,11 @@
+# Laptop / orchestration environment (no GPU required)
+pydantic>=2.10
+pydantic-settings>=2.7
+pyyaml>=6.0
+qdrant-client>=1.14
+openai>=1.60
+tiktoken>=0.9
+pymupdf>=1.25
+pdfplumber>=0.11
+numpy>=2.2
+httpx>=0.28
