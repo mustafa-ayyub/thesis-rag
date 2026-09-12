@@ -17,6 +17,14 @@ logs/
 # Data — documents and results are large/generated, not versioned
 data/documents/
 data/results/
+data/chunks_export.json
+data/vectors.json
+
+# Claude project instructions — local only
+CLAUDE.md
+
+# Local docs — not versioned
+docs/
 
 # OS
 .DS_Store
