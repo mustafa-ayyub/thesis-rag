@@ -19,9 +19,10 @@ python3 -m venv "${VENV_PATH}"
 source "${VENV_PATH}/bin/activate"
 pip install --upgrade pip
 
-# Install PyTorch for the cluster CUDA version.
-# Check with: nvcc --version  — Grete typically runs CUDA 12.1
-pip install torch --index-url https://download.pytorch.org/whl/cu121
+# Install PyTorch for the cluster.
+# Grete GPU nodes run driver 570 (CUDA 12.8 capable) — cu124 wheels are compatible.
+# (cu121 wheels stopped at torch 2.5.1; torch >= 2.6 required by newer transformers, CVE-2025-32434)
+pip install "torch>=2.6" --index-url https://download.pytorch.org/whl/cu124
 
 pip install -r "${REPO_PATH}/requirements-gpu.txt"
 

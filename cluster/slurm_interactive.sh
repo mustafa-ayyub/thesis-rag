@@ -9,12 +9,12 @@
 # ──────────────────────────────────────────────────────────────────────────────
 #SBATCH --job-name=thesis-gpu-server
 #SBATCH --account=kisski-bingen-ma
-#SBATCH --partition=grete:shared
+#SBATCH --partition=grete:interactive
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:1g.20gb:1
 #SBATCH --time=04:00:00
 #SBATCH --output=logs/gpu_server_%j.out
 #SBATCH --error=logs/gpu_server_%j.err
@@ -36,6 +36,10 @@ echo "      remote_url: \"http://localhost:8000\""
 echo "==================================================================="
 
 source ~/thesis-venv-gpu/bin/activate
+
+# Compute nodes have no internet — models are pre-cached in $HOME, load offline
+export HF_HUB_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
 
 # Adjust REPO_PATH if the repo is cloned to a different location on the cluster
 REPO_PATH="${HOME}/thesis-rag"
