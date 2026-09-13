@@ -4,7 +4,6 @@ from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
-from FlagEmbedding import BGEM3FlagModel, FlagReranker
 from pydantic import BaseModel
 
 logging.basicConfig(
@@ -24,7 +23,8 @@ _BGE_MAX_LENGTH = 512
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global _embed_model, _rerank_model
-
+    from FlagEmbedding import BGEM3FlagModel, FlagReranker
+    
     logger.info("Loading BAAI/bge-m3...")
     _embed_model = BGEM3FlagModel("BAAI/bge-m3", use_fp16=True)
     logger.info("Loading BAAI/bge-reranker-v2-m3...")
