@@ -14,7 +14,7 @@ from src.types import ChunkMetadata
 
 logger = logging.getLogger(__name__)
 
-# cl100k_base matches qwen3.6-27b's tokenizer, keeping chunk token counts
+# cl100k_base matches qwen8-27b's tokenizer, keeping chunk token counts
 # consistent with generation without a second tokenization pass
 _ENCODING = "cl100k_base"
 

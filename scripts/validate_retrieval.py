@@ -26,6 +26,7 @@ import math
 import re
 import subprocess
 import sys
+import time
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -124,6 +125,7 @@ def main() -> None:
     retriever = Retriever(val_cfg)
 
     per_query: list[dict] = []
+    rewrite_latencies: list[float] = []
     by_type: dict[str, dict[str, list[float]]] = {
         t: {"precision_at_5": [], "recall_at_10": [], "ndcg_at_10": [], "mrr": []}
         for t in _QUERY_TYPES
@@ -147,6 +149,10 @@ def main() -> None:
             continue
 
         logger.info("Query %s (%s): %s", qid, qtype, question[:80])
+        t0 = time.time()
+        rewritten = retriever._rewriter.rewrite(question)
+        rewrite_s = time.time() - t0
+        rewrite_latencies.append(rewrite_s)
         chunks = retriever.retrieve(question)
         retrieved_pages = [c.page_number for c in chunks]
         relevant = set(ground_truth)
@@ -157,7 +163,8 @@ def main() -> None:
         mrr = _mrr(retrieved_pages, relevant)
 
         entry.update({
-            "rewritten_query": retriever._last_rewritten,
+            "rewritten_query": rewritten,
+            "rewrite_seconds": round(rewrite_s, 2),
             "retrieved_pages": retrieved_pages,
             "ground_truth_pages": ground_truth,
             "precision_at_5": round(p5, 4),
@@ -177,6 +184,7 @@ def main() -> None:
             "  p@5=%.3f r@10=%.3f ndcg@10=%.3f mrr=%.3f",
             p5, r10, ndcg, mrr,
         )
+        time.sleep(val_cfg.saia.request_interval_seconds)
 
     summary: dict = {}
     for qtype in _QUERY_TYPES:
@@ -209,6 +217,13 @@ def main() -> None:
         json.dump(output, f, indent=2)
 
     logger.info("Results written to %s", out_path)
+    if rewrite_latencies:
+        lat = sorted(rewrite_latencies)
+        logger.info(
+            "Rewriter latency: n=%d min=%.1fs median=%.1fs p90=%.1fs max=%.1fs (>10s: %d)",
+            len(lat), lat[0], lat[len(lat) // 2], lat[int(len(lat) * 0.9)], lat[-1],
+            sum(1 for x in lat if x > 10),
+        )
     for qtype, metrics in summary.items():
         if metrics:
             logger.info(

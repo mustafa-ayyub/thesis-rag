@@ -13,10 +13,13 @@ models:
 saia:
   # api_key is read from the SAIA_API_KEY env var — never set it here
   base_url: "https://chat-ai.academiccloud.de/v1"
-  model: "qwen3.6-27b"
+  model: "qwen3.8-27b"
   temperature: 0
   max_tokens: 2048
-  rewriter_max_tokens: 128
+  # headroom for longer multi-step query rewrites (thinking is disabled in the rewriter)
+  rewriter_max_tokens: 300
+  # SAIA allows 30 req/min — 3s spacing keeps a 95-query run at ~20 req/min
+  request_interval_seconds: 3
 
 retrieval:
   chunk_size_tokens: 512

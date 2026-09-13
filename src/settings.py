@@ -24,10 +24,11 @@ class SaiaSettings(BaseSettings):
 
     api_key: str = ""
     base_url: str = "https://chat-ai.academiccloud.de/v1"
-    model: str = "qwen3.6-27b"
+    model: str = "qwen3.8-27b"
     temperature: float = 0.0
     max_tokens: int = 2048
-    rewriter_max_tokens: int = 128
+    rewriter_max_tokens: int = 300
+    request_interval_seconds: float = 3.0
 
 
 class RetrievalSettings(BaseModel):

@@ -36,6 +36,9 @@ class QueryRewriter:
                 {"role": "system", "content": REWRITER_SYSTEM_PROMPT},
                 {"role": "user", "content": query},
             ],
+            # qwen3.8 thinks before answering; a one-step rewrite gains
+            # nothing from it, and the reasoning tokens would eat the budget
+            extra_body={"chat_template_kwargs": {"enable_thinking": False}},
         )
         # content is None on a filtered/empty response — fall back to the
         # original query so retrieval still runs
