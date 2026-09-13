@@ -20,6 +20,9 @@ _MARGIN_RATIO = 0.07
 _TITLE_SEARCH_GAP = 35.0
 # Overlap fraction of a text block's area required to classify it as "inside a table"
 _TABLE_OVERLAP_THRESHOLD = 0.3
+# Blocks whose largest span is at or below this size are footnotes / chart captions
+# (corpus data: footnotes ≤ 8.4pt; body text ≥ 11pt; headings ≥ 11.4pt)
+_FOOTNOTE_SIZE_THRESHOLD = 9.0
 
 
 @dataclass
@@ -191,14 +194,25 @@ def _extract_text(
     bottom_cutoff = page_height * (1.0 - _MARGIN_RATIO)
 
     parts: list[str] = []
-    for x0, y0, x1, y1, text, _block_no, block_type in fitz_page.get_text("blocks"):
-        if block_type != 0:  # skip images and other non-text blocks
+    for block in fitz_page.get_text("dict")["blocks"]:
+        if block.get("type") != 0:  # skip images and other non-text blocks
             continue
+        x0, y0, x1, y1 = block["bbox"]
         mid_y = (y0 + y1) / 2.0
         if mid_y < top_cutoff or mid_y > bottom_cutoff:
             continue  # header or footer zone
         if table_bboxes and _overlaps_table((x0, y0, x1, y1), table_bboxes):
             continue
+        max_size = max(
+            (s["size"] for ln in block["lines"] for s in ln["spans"]),
+            default=0.0,
+        )
+        if max_size <= _FOOTNOTE_SIZE_THRESHOLD:
+            continue  # footnote or chart caption — font too small
+        text = "\n".join(
+            "".join(s["text"] for s in ln["spans"])
+            for ln in block["lines"]
+        )
         parts.append(text)
 
     return _clean_lines("\n".join(parts))
@@ -230,8 +244,6 @@ def _clean_lines(text: str) -> str:
             continue
         if s.isdigit():
             continue  # page number
-        if re.match(r"^\d+\s", s) and len(s) < 25:
-            continue  # footnote reference (e.g. "1 See also...")
         if re.match(r"^(Note|Source|Sources)s?[:\.]", s, re.IGNORECASE):
             continue  # footnote or source label
         cleaned.append(s)

@@ -1,10 +1,14 @@
 import logging
-import os
+import sys
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.settings import load_settings
 
 logging.basicConfig(
     level=logging.INFO,
@@ -15,8 +19,9 @@ logger = logging.getLogger(__name__)
 _embed_model = None
 _rerank_model = None
 
-_EMBED_BATCH_SIZE = int(os.environ.get("EMBED_BATCH_SIZE", "32"))
-_RERANK_BATCH_SIZE = int(os.environ.get("RERANK_BATCH_SIZE", "16"))
+_cfg = load_settings()
+_EMBED_BATCH_SIZE = _cfg.gpu.batch_size_embed
+_RERANK_BATCH_SIZE = _cfg.gpu.batch_size_rerank
 _BGE_MAX_LENGTH = 512
 
 

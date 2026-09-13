@@ -5,6 +5,7 @@ from src.ingestion.parser import (
     _clean_lines,
     _is_header_footer_pattern,
     _overlaps_table,
+    _extract_text,
 )
 from src.ingestion.chunker import (
     _chunk_text,
@@ -54,8 +55,22 @@ def test_clean_lines_removes_page_numbers():
     assert _clean_lines("Some text\n42\nMore text") == "Some text\nMore text"
 
 
-def test_clean_lines_removes_short_footnote_refs():
-    assert "See also" not in _clean_lines("Text\n3 See also the annex\nNext")
+def test_extract_text_filters_footnotes():
+    # Page 27 (0-indexed 26) of Bundesbank 2023 has "2 See Barr (2023)." at 8pt —
+    # must be absent from extracted text while body prose is preserved.
+    import fitz
+    path = Path("data/documents/Bundesbank-Financial-Stability-Review-2023.pdf")
+    if not path.exists():
+        pytest.skip("PDF not in repo")
+    doc = fitz.open(str(path))
+    text = _extract_text(doc[26], [])
+    assert "See Barr" not in text
+    assert len(text) > 50  # body text still present
+
+
+def test_clean_lines_keeps_numbered_section_headings():
+    result = _clean_lines("Intro text\n2 Financial markets\nMore prose")
+    assert "2 Financial markets" in result
 
 
 def test_clean_lines_removes_note_and_source_labels():

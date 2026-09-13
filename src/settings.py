@@ -20,7 +20,7 @@ class ModelSettings(BaseModel):
 class SaiaSettings(BaseSettings):
     # api_key is read from the SAIA_API_KEY env var (env_prefix "SAIA_" +
     # field name), never from YAML
-    model_config = SettingsConfigDict(env_prefix="SAIA_", extra="ignore")
+    model_config = SettingsConfigDict(env_prefix="SAIA_", env_file=".env", extra="ignore")
 
     api_key: str = ""
     base_url: str = "https://chat-ai.academiccloud.de/v1"
