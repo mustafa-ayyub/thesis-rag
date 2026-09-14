@@ -28,7 +28,11 @@ echo "    remote_url: \"http://localhost:${LOCAL_PORT}\""
 echo ""
 echo "When done, close the tunnel and reset remote_url to \"\" in settings.yaml."
 
+# Without keepalives, a network drop leaves a zombie tunnel that accepts
+# local connections but never forwards them (silent timeouts on the client)
 ssh -N \
     -L "${LOCAL_PORT}:localhost:${REMOTE_PORT}" \
     -J "${GWDG_USER}@${LOGIN_NODE}" \
+    -o ServerAliveInterval=15 \
+    -o ServerAliveCountMax=3 \
     "${GWDG_USER}@${NODE}"
