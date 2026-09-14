@@ -17,11 +17,9 @@ class Retriever:
         self._embedder = Embedder(cfg)
         self._search = HybridSearch(cfg)
         self._reranker = Reranker(cfg)
-        self._last_rewritten: str = ""
 
     def retrieve(self, query: str) -> list[RetrievedChunk]:
         rewritten = self._rewriter.rewrite(query)
-        self._last_rewritten = rewritten
         dense, sparse = self._embedder.embed_query(rewritten)
         candidates = self._search.search(
             dense, sparse, top_k=self._cfg.retrieval.hybrid_top_k

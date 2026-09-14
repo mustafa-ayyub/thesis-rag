@@ -154,7 +154,8 @@ def main() -> None:
         rewrite_s = time.time() - t0
         rewrite_latencies.append(rewrite_s)
         chunks = retriever.retrieve(question)
-        retrieved_pages = [c.page_number for c in chunks]
+        # dedupe: two chunks from the same page would double-count it in the metrics
+        retrieved_pages = list(dict.fromkeys(c.page_number for c in chunks))
         relevant = set(ground_truth)
 
         p5 = _precision_at_k(retrieved_pages, relevant, 5)

@@ -130,3 +130,45 @@ def test_query_rewriter_different_queries_not_cached():
         qr.rewrite("query two")
 
     assert mock_client.chat.completions.create.call_count == 2
+
+
+def test_query_rewriter_retries_on_server_error():
+    from openai import InternalServerError
+    from src.retrieval.query_rewriter import QueryRewriter
+
+    cfg = Settings()
+    with patch("src.retrieval.query_rewriter.OpenAI") as MockOpenAI, patch(
+        "src.retrieval.query_rewriter.time.sleep"
+    ) as mock_sleep:
+        mock_client = MagicMock()
+        MockOpenAI.return_value = mock_client
+        mock_client.chat.completions.create.side_effect = [
+            InternalServerError("boom", response=MagicMock(status_code=500), body=None),
+            MagicMock(choices=[MagicMock(message=MagicMock(content="rewritten"))]),
+        ]
+        qr = QueryRewriter(cfg)
+        result = qr.rewrite("test query")
+
+    assert result == "rewritten"
+    assert mock_client.chat.completions.create.call_count == 2
+    mock_sleep.assert_called_once_with(30.0)
+
+
+def test_query_rewriter_gives_up_after_max_attempts():
+    from openai import InternalServerError
+    from src.retrieval.query_rewriter import QueryRewriter
+
+    cfg = Settings()
+    err = InternalServerError("boom", response=MagicMock(status_code=500), body=None)
+    with patch("src.retrieval.query_rewriter.OpenAI") as MockOpenAI, patch(
+        "src.retrieval.query_rewriter.time.sleep"
+    ) as mock_sleep:
+        mock_client = MagicMock()
+        MockOpenAI.return_value = mock_client
+        mock_client.chat.completions.create.side_effect = err
+        qr = QueryRewriter(cfg)
+        with pytest.raises(InternalServerError):
+            qr.rewrite("test query")
+
+    assert mock_client.chat.completions.create.call_count == 5
+    assert mock_sleep.call_count == 4
