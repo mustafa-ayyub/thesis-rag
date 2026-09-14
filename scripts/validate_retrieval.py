@@ -7,12 +7,19 @@ Queries file format (data/queries/queries.json):
         "query_id": "Q001",
         "query_type": "simple_factual",
         "question": "What are the main systemic risks in the euro area?",
+        "source_document": "ECB-Financial-Stability-Reviews-2026.pdf",
         "ground_truth_pages": [32, 33]
       }
     ]
 
+Single-document queries carry "source_document". A handful of by-design
+cross-edition queries instead carry "source_documents" — a map of
+ground-truth page -> document, e.g. {"76": "...-2023.pdf", "87": "...-2025.pdf"}.
+
 Query types: simple_factual, multi_step, no_retrieval, edge_cases.
 no_retrieval queries are skipped for metrics (summary entry is null).
+Metrics match on (source_document, page_number) — the five corpus PDFs
+share page numbers, so page alone is ambiguous.
 
 Usage:
     python scripts/validate_retrieval.py
@@ -60,19 +67,19 @@ def _git_commit() -> str:
         return "unknown"
 
 
-def _precision_at_k(pages: list[int], relevant: set[int], k: int) -> float:
+def _precision_at_k(pages: list[tuple[str, int]], relevant: set[tuple[str, int]], k: int) -> float:
     top = pages[:k]
     return sum(1 for p in top if p in relevant) / k if k else 0.0
 
 
-def _recall_at_k(pages: list[int], relevant: set[int], k: int) -> float:
+def _recall_at_k(pages: list[tuple[str, int]], relevant: set[tuple[str, int]], k: int) -> float:
     if not relevant:
         return 0.0
     top = pages[:k]
     return sum(1 for p in top if p in relevant) / len(relevant)
 
 
-def _ndcg_at_k(pages: list[int], relevant: set[int], k: int) -> float:
+def _ndcg_at_k(pages: list[tuple[str, int]], relevant: set[tuple[str, int]], k: int) -> float:
     dcg = sum(
         1.0 / math.log2(rank + 1)
         for rank, p in enumerate(pages[:k], start=1)
@@ -83,7 +90,7 @@ def _ndcg_at_k(pages: list[int], relevant: set[int], k: int) -> float:
     return dcg / idcg if idcg > 0 else 0.0
 
 
-def _mrr(pages: list[int], relevant: set[int]) -> float:
+def _mrr(pages: list[tuple[str, int]], relevant: set[tuple[str, int]]) -> float:
     for rank, p in enumerate(pages, start=1):
         if p in relevant:
             return 1.0 / rank
@@ -116,6 +123,13 @@ def main() -> None:
 
     if not queries:
         logger.error("No queries in %s", queries_path)
+        sys.exit(1)
+
+    missing = [q.get("query_id", "?") for q in queries
+               if q.get("query_type") != "no_retrieval"
+               and not q.get("source_document") and not q.get("source_documents")]
+    if missing:
+        logger.error("Queries missing source_document/source_documents: %s", missing)
         sys.exit(1)
 
     logger.info("Loaded %d queries", len(queries))
@@ -154,19 +168,29 @@ def main() -> None:
         rewrite_s = time.time() - t0
         rewrite_latencies.append(rewrite_s)
         chunks = retriever.retrieve(question)
-        # dedupe: two chunks from the same page would double-count it in the metrics
-        retrieved_pages = list(dict.fromkeys(c.page_number for c in chunks))
-        relevant = set(ground_truth)
+        # all five PDFs share page numbers — a hit needs the right doc AND page;
+        # dedupe so two chunks from the same page don't double-count
+        retrieved = list(dict.fromkeys((c.doc_name, c.page_number) for c in chunks))
+        doc_map = q.get("source_documents")
+        if doc_map:
+            relevant = {(doc_map[str(p)], p) for p in ground_truth}
+        else:
+            relevant = {(q["source_document"], p) for p in ground_truth}
 
-        p5 = _precision_at_k(retrieved_pages, relevant, 5)
-        r10 = _recall_at_k(retrieved_pages, relevant, 10)
-        ndcg = _ndcg_at_k(retrieved_pages, relevant, 10)
-        mrr = _mrr(retrieved_pages, relevant)
+        p5 = _precision_at_k(retrieved, relevant, 5)
+        r10 = _recall_at_k(retrieved, relevant, 10)
+        ndcg = _ndcg_at_k(retrieved, relevant, 10)
+        mrr = _mrr(retrieved, relevant)
 
+        if "source_documents" in q:
+            entry["source_documents"] = q["source_documents"]
+        else:
+            entry["source_document"] = q["source_document"]
         entry.update({
             "rewritten_query": rewritten,
             "rewrite_seconds": round(rewrite_s, 2),
-            "retrieved_pages": retrieved_pages,
+            "retrieved_docs": [d for d, _ in retrieved],
+            "retrieved_pages": [p for _, p in retrieved],
             "ground_truth_pages": ground_truth,
             "precision_at_5": round(p5, 4),
             "recall_at_10": round(r10, 4),

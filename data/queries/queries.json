@@ -13,7 +13,8 @@
       "In March 2023, California-based Silicon Valley Bank (SVB) ran into difficulties. The institution was a subsidiary of SVB Financial Group and held almost all of the latter's assets. SVB's deposits were heavily concentrated in certain sectors. Thus, at the end of 2022, more than half of deposits came from technology sector enterprises. The bank had mainly invested strong inflows into deposits in long-dated bonds. These investments lost considerable value when interest rates were raised in 2022. At the same time, SVB customers began to shift their deposits from non-interest-bearing into interest-bearing deposits. This increased interest costs for the bank.",
       "Furthermore, customers increasingly withdrew deposits from mid-2022. In order to accommodate these withdrawals, the bank sold most of its available-for-sale portfolio at the beginning of March 2023. SVB therefore had to deduct the accumulated losses in value from balance sheet equity. At the beginning of March, SVB announced the sale of bonds in its available-for-sale portfolio with accumulated losses of around US$1.8 billion after tax. A planned capital increase never took place because it had become apparent that SVB's business model was not sustainable in the medium term in an environment of higher interest rates.",
       "After it became clear that SVB's business model was unsustainable, a bank run commenced. Depositors withdrew their predominantly uninsured deposits on a large scale. The situation was exacerbated by the highly concentrated customer base and rapid communication via digital channels. On 10 March 2023, the US Federal Deposit Insurance Corporation (FDIC) closed SVB. Overall, it is evident that the insufficient management of interest rate and liquidity risk was the underlying cause of SVB's failure. This management had not kept up with the bank's rapid growth."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q002",
@@ -27,7 +28,8 @@
     "contexts": [
       "Since February 2023, banks in Germany have had to meet the capital requirements of the countercyclical capital buffer (CCyB) and sectoral systemic risk buffer (sSyRB). These capital buffers are the key components of the package of macroprudential measures announced by the Federal Financial Supervisory Authority (BaFin) in January 2022. The CCyB was raised from 0% to 0.75% of risk-weighted assets (RWAs) on domestic exposures and an sSyRB of 2% of RWAs on loans secured by residential real estate was introduced. The package of measures has strengthened the resilience of the banking system by conserving €23.9 billion in common equity tier 1 (CET1) capital as at the end of the first half of 2023.",
       "Releasing conserved capital would enable banks to hold the necessary capital against additional loans totalling over 15% of annual new lending to domestic non-financial corporations and households. The Bundesbank regularly reviews the impact of the package of macroprudential measures on the banking system. Overall, less than 15% of banks' original excess capital is conserved via the buffers. Only a few small institutions have so far failed to meet the requirements of the package of measures using their excess capital. The package of measures has not been observed to have had any negative macroeconomic effects on the supply of credit."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q003",
@@ -42,7 +44,8 @@
     "contexts": [
       "Since 2014, the Bundesbank has undertaken the task of estimating critical interest rate levels for German life insurance companies. These indicate the market rate levels at or above which the going concern of life insurers could be at risk should the hypothetical extreme scenario of a wave of policy lapses come to pass. The previous estimation methodology suggested a median critical interest rate level for German life insurance companies of 3.0% at the end of 2022. Using these data produces a median critical interest rate level of 3.3%. If we assume that life insurance companies would reduce their terminal bonuses to zero in the event of a wave of policy lapses, the median increases to 3.5%.",
       "Simulated cancellation fees of 5% of the surrender value, excluding terminal bonuses, increase the median to 4.0%. If simulated public 'Riester' subsidies are taken into account as well, the median rises to 4.3% and the 25th percentile reaches 3.3%. The values obtained via the new estimation methodology are likely to be more economically relevant than those obtained via the previous estimation methodology. However, they can only be calculated once and only for 2022, and also carry a high degree of estimation uncertainty, as cancellation fees and public 'Riester' subsidies can only be simulated."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q004",
@@ -57,7 +60,8 @@
     "contexts": [
       "In future, net interest income is likely to decrease owing to sharply declining demand for loans. Alongside rising financing costs, waning loan demand in both the corporate and household sectors could exert pressure on net interest income. The Eurosystem's quarterly Bank Lending Survey (BLS) shows that corporate demand for loans has fallen sharply since October 2022. New lending to households has roughly halved since the interest rate rise at the start of 2022. Following the sharp rise in the first half of 2023, net interest income is likely to fall significantly in the second half of the year, with the positive effects from the first six months likely to carry through to net interest income for full-year 2023. While net interest income stood at €91.6 billion in 2022, it could increase by around €17 billion in 2023.",
       "Next year, by contrast, it is likely to be €15 billion down on the 2022 figure. Assuming that, in addition, 10% of sight deposits are switched to time deposits, net interest income could decrease by a further €2 billion. However, net interest income is still likely to be sufficient for banks engaged in interest business, without the prospect of losses in the overall result. That said, losses could arise if credit defaults increase more than expected."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q005",
@@ -72,7 +76,8 @@
     "contexts": [
       "The macroeconomic effects are moderate in the 'Net Zero 2050' scenario. In terms of gross domestic product (GDP), the maximum effect is reached after five years and economic output falls by 2.3% relative to the baseline scenario. The higher emission price leads to rising production costs and consequently to higher sales prices and a reduction in demand and production. This diminishes corporate profits and has a correspondingly negative impact on the average enterprise value, which reflects the discounted present value of future profits. In the 'Net Zero 2050' scenario, enterprise values fall by 14% against the baseline scenario in the first year and then remain reduced for years given the continued rise in the carbon price.",
       "Carbon prices also affect inflation and the risk-free interest rate. The initial result is a significant effect on inflation, which rises by just under 1.5 percentage points relative to the baseline scenario. In the 'Net Zero 2050' scenario, inflationary pressures will also remain elevated in subsequent years given the continued rise in the carbon price. The risk-free interest rate accordingly continues to go up via the monetary policy reaction function. In the 'Net Zero 2050' scenario, the risk-free interest rate rises by up to 130 basis points and is a major driver of financial market price developments, especially regarding bond prices."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q006",
@@ -87,7 +92,8 @@
     "contexts": [
       "The actual interest rates on overnight deposits are significantly lower than those that would have been expected based on past developments. For time deposits, by contrast, interest rates were adjusted largely as expected. If banks had passed on the higher interest rates as observed in the past, their interest expenditure would have been around €13.5 billion higher in 2022. This equates to roughly 15% of their total net interest income. For 2023 as a whole, that figure is likely to be as high as €29 billion.",
       "and credit cooperatives, in particular, have again significantly increased their risk provisioning, i.e. the sum of their specific and general loan loss provisions, although this increase has occurred from a very low level. After a long period of virtually continuous decline in credit risk, this is now bottoming out and potentially even turning around. One indication of this, amongst others, is that savings banks and credit cooperatives have increased their specific loan loss provisions again for the first time since 2004. The increase in non-performing loans appears to signal the end of the long period of unusually low default risk. Since mid-2022, there has been an increase in the proportion of non-performing corporate loans."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q007",
@@ -102,7 +108,8 @@
     "contexts": [
       "Real estate companies have comparatively low interest coverage ratios, making them more vulnerable to rises in interest rates. In addition, profits have declined due to falling real estate prices and the corresponding recognised valuation losses. Around one-third of commercial real estate loans could be subject to significant adjustments in their interest rates over the next three years. This could cause credit defaults and credit losses to rise more sharply, as the value of loan collateral has been falling for some time.",
       "Residential real estate loans account for just over three-quarters of household debt in Germany. During the low interest rate period, households had agreed considerably longer interest rate fixation periods with their lenders. Loans granted when interest rates were at their lowest, and that were responsible for the sharp growth in residential real estate loans, are typically not due for refinancing until 2028 at the earliest. Long interest rate fixation periods are thus shielding the majority of households with outstanding residential real estate loans from an imminent rise in their interest burden."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q008",
@@ -117,7 +124,8 @@
     "contexts": [
       "Higher risk premia can also be observed in the loans granted by German banks. Interest rates on commercial real estate loans have risen more sharply than risk-free interest rates. Banks therefore appear to be pricing the increased risk into their new lending. The changed macro-financial environment contributed to the increase in non-performing corporate loans in the first half of the year.",
       "If the banks had been required to report the losses in value in full, their CET1 capital, and therefore also their capital reserves, would have been considerably lower. In addition, capital reserves have been bolstered by the sharp increase in net interest income. Higher interest expenditure could push net interest income back down again in the future."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q009",
@@ -132,7 +140,8 @@
     "contexts": [
       "That said, life insurers are burdened with unrealised losses as a result of the rise in interest rates. These unrealised losses could limit the ability of life insurers to invest countercyclically in future periods of stress, thus hampering the kind of market-stabilising behaviour that life insurers showed during the stress episode at the onset of the coronavirus pandemic in March 2020. At present, only around 5% of German life insurers' assets could be liquidated at short notice without realising unrealised losses. Hence, the market value of their assets at the end of 2022 was just over 9% below their carrying amounts.",
       "Simulated cancellation fees of 5% of the surrender value, excluding terminal bonuses, increase the median to 4.0%. If simulated public 'Riester' subsidies are taken into account as well, the median rises to 4.3% and the 25th percentile reaches 3.3%. The values obtained via the new estimation methodology are likely to be more economically relevant than those obtained via the previous estimation methodology."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q010",
@@ -147,7 +156,8 @@
     "contexts": [
       "The potentially higher borrowing costs should be manageable for the vast majority of companies. Some, however, could run into difficulties, especially those with both higher debt and low profits. Among listed companies, for which relatively up-to-date data are available, relatively few companies fulfil both of these criteria. For example, fewer than one-quarter of more highly indebted companies had an interest coverage ratio of less than 1 in 2022. This proportion did not change significantly compared with 2019. An interest coverage ratio of 1 is a critical threshold, as the enterprise's annual earnings before interest and taxes would then be insufficient to cover its interest expenditure.",
       "Banks have tightened their credit standards since the second half of 2022. They are now giving greater weight particularly to the factors that influence their risk assessment. These include, for example, the economic situation as well as firm-specific and sector-specific factors. Data from the Bundesbank Online Panel – Firms indicate that, in terms of approving requested credit amounts, banks have been barely more restrictive in credit negotiations in 2023 than in previous years. According to the survey results, it is instead their terms and conditions that have become more restrictive."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q011",
@@ -162,7 +172,8 @@
     "contexts": [
       "In this scenario, the aggregate CET1 capital ratio of German banks participating in the stress tests would fall by 5.6 percentage points to 10.2% between the end of 2022, the base year of the stress tests, and 2025. In this scenario, a significant proportion of the banks would fall short of the overall capital requirements, including the combined buffer requirements. This result indicates that there are still stability risks at German banks.",
       "The first and smallest component of the capital reserves consists of the package of macroprudential measures amounting to €24 billion. This corresponds to 0.7% of RWAs. The second component comprises the other regulatory capital buffers and amounts to €100 billion, or 3% of RWAs. Excess capital constitutes the third component of the capital reserves. This is the portion of CET1 capital that banks voluntarily hold in excess of the overall minimum requirements and capital buffers. In mid-2023, excess capital stood at approximately €160 billion, or 4.7% of RWAs. Together with the capital buffers, banks therefore have capital reserves totalling €280 billion, or 8.3% of their RWAs."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q012",
@@ -177,7 +188,8 @@
     "contexts": [
       "In the second quarter of 2023, the liquidity coverage ratio (LCR) stood at 148% for large, systemically important institutions, 166% for savings banks and credit cooperatives and 183% for other banks. This means that the LCR for all categories of bank is well above the regulatory threshold of 100%. However, although a good level of liquidity is necessary, it is not sufficient to ensure that institutions remain solvent.",
       "Although BaFin can set minimum requirements on equity which households have to provide when buying a property and amortisation requirements for residential real estate loans, it is not yet authorised to impose caps already widely available in other countries for income-based lending standards such as the debt-service-to-income ratio or the debt-to-income ratio of new borrowers. Both ratios are important indicators for assessing borrowers' default risk. With the full set of instruments, in future, it could focus on limiting risks to financial stability that accumulate in an environment in which house prices are rising sharply, housing loans are recording dynamic growth and lending standards are deteriorating."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q013",
@@ -192,7 +204,8 @@
     "contexts": [
       "Measured in terms of their solvency ratios according to Solvency II, the resilience of German life insurers remains high. At just under 600% in the second quarter of 2023, the median prudential solvency ratio, i.e. the ratio of own funds to capital requirements, is approximately 200 percentage points higher than at the end of 2021. The main reason for this is the rise in risk-free interest rates. When interest rates increase, recognised liabilities decline more sharply in value than assets because of their longer maturities.",
       "If the digital euro is introduced, users resident or established in the euro area will be able to exchange cash or bank deposits for digital euro. The exchange of bank deposits would lead to an outflow of liquidity from banks. In order to rule out any possible negative impact on the banking system and financial stability, the European Commission's current legislative proposal on the digital euro stipulates that the ECB may place limits on use of the digital euro as a store of value. To this end, there should be a maximum limit for holdings of central bank digital currency. A €3,000 holding limit per person is currently being discussed."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q014",
@@ -206,7 +219,8 @@
     "contexts": [
       "The debt sustainability of households in Germany has improved overall. By mid-2024, households' aggregate debt-to-disposable-income ratio fell to around 87% – corresponding to a decline of around 11 percentage points compared with the peak at the end of 2021. This decline is not only due to rising incomes, but also to a drop in new lending compared with the period before the increase in interest rates.",
       "Nominal wage increases support the resilience of households. The long interest rate fixation periods for residential real estate loans granted in the previous low interest rate period are protecting most households from rising debt service costs for the time being. Rising nominal incomes therefore tend to improve the ability of households with existing loan contracts to service their debt."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q015",
@@ -220,7 +234,8 @@
     "contexts": [
       "German NBFIs – i.e. insurance corporations and pension funds, investment funds and other financial intermediaries – together hold around 40% of all financial assets in the German financial system. The share of NBFIs in the German financial system has risen by 15 percentage points since 2009, which represents a slightly smaller rise than that of NBFIs in the rest of the European financial system. The banking sector continues to play the biggest role in the German financial system, holding 49% of all financial assets.",
       "The NBFI sector has grown significantly since the global financial crisis, both globally and in Germany. At the global and euro area levels, NBFIs hold around one-half of all financial assets. In the euro area, this share has grown by roughly 18 percentage points since the global financial crisis. Additionally, NBFIs in the euro area provide around 40% of financing to the real economy, with direct lending by NBFIs seeing particular growth."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q016",
@@ -234,7 +249,8 @@
     "contexts": [
       "According to estimates, in the third quarter of 2022 the unrealised losses in the banking books of savings banks amounted to around 20% of common equity tier 1 (CET1) capital, and were even as high as around 29% in the case of cooperative banks. Since the end of 2022, unrealised losses in the banking books of savings banks and credit cooperatives have fallen significantly, standing at around 6% and 15% of CET1 capital, respectively, in the second quarter of 2024.",
       "The decline in unrealised losses is due to interest rate developments and interest rate positions reaching maturity or approaching their maturity date (pull-to-par effect). At maturity, the price of a bond is normally equal to its nominal value. The pull-to-par effect describes the price of a bond converging to its nominal value over time."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q017",
@@ -248,7 +264,8 @@
     "contexts": [
       "According to the latest data, only around 4% of banks in Germany have a liquidity shortfall in the maximum-demand scenario with a holding limit of €3,000. In addition, the liquidity shortfall remains relatively small. On aggregate, affected banks would have to add an additional 0.3% of high-quality liquid assets to their stock in order to cover the liquidity shortfall. The comparatively low liquidity needs (around 0.5% of interbank trading, as at the fourth quarter of 2023) could be provided via interbank trading.",
       "Even if all depositors were to shift their balances up to a holding limit of €3,000, the impact on liquidity in the German banking sector would be limited. The analysis refers to a scenario from the previous year in which depositors fully utilise the holding limits (maximum-demand scenario). The liquidity buffer, which is derived from the liquidity coverage ratio (LCR), is key in this context."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q018",
@@ -263,7 +280,8 @@
     "contexts": [
       "GDP falls by around 1.4% within the first four quarters. Enterprise values drop by about 28% in the first quarter. These strong decreases are attributable, in large part, to interactions with the financial system and their impact on the real economy. Since there are no further increases in the carbon price and new investment takes into account the adjusted carbon price pathway, enterprise values recover very swiftly, however.",
       "The increased carbon price leads to lower economic output and lower enterprise values relative to the baseline. The focus here is on the impact on Germany's real economy and financial sector. The impact of the carbon price increase in Europe is examined to take into account strong trade links. The initial sharp rise in inflation by around 0.5 percentage point compared with the baseline rapidly subsides again. Seeing as there are no further carbon price increases and associated spikes in inflation, the risk-free interest rate only rises temporarily."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q019",
@@ -278,7 +296,8 @@
     "contexts": [
       "Since the end of 2021, yields on euro-denominated corporate bonds have risen by more than 2.5 percentage points, despite lower risk premia in some segments. Interest rates on new loans have even increased by just under 4 percentage points. If existing loans are taken into account, the rise in average interest rates amounts to just 1.8 percentage point overall. This is because some enterprises are still benefiting from comparatively favourable financing costs. For fixed interest loans that were taken out in or before 2021, the mean and median of current interest rates are no greater than 2 %.",
       "Institutions have made significantly higher loss allowances for loans to enterprises and households in recent quarters. In relation to the exposure amount, annualised additions to loss allowances amounted to around 0.4 % in the second quarter, thus reaching their highest level in over seven years. The increase is likely to be due to weak economic developments and the higher lending rates. In the coming quarters, loss allowances could increase further."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q020",
@@ -293,7 +312,8 @@
     "contexts": [
       "The German banking system's capital base remains sound. The risk-weighted CET1 ratio stood at an average of around 17 % for O-SIIs in the second quarter of 2024, around 16 % for savings banks and credit cooperatives and around 20 % for other small and medium-sized banks. CET1 ratios thus clearly exceed the regulatory minimum requirements. Capital reserves, i.e. CET1 in excess of minimum requirements, consist of regulatory capital buffers and freely available excess capital chosen by the banks themselves.",
       "The low average risk weights for O-SIIs are the result of a favourable perception of risk. In the last decade, the average risk weights in the loan portfolio of large, systemically important banks have hardly changed, especially not for corporate exposures. Even after the rise in corporate insolvencies since the end of 2021, there was no increase. This is not least a result of banks' low assessment of loan PDs. Any underestimation of these PDs could in turn mean a commensurate overestimation of the current resilience of the banking system as measured by capital ratios."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q021",
@@ -308,7 +328,8 @@
     "contexts": [
       "Given the assets' long terms to maturity, the unrealised losses of life insurers are far larger than those of banks. Specifically, the unrealised losses of life insurers in the second quarter of 2024 amounted to around 9 % of assets at their book value. More than 80 % of German life insurers have unrealised losses. As long-term interest rates fell slightly in the third quarter of 2024, unrealised losses are also likely to have become somewhat smaller. Unrealised losses will thus decrease far more slowly among German life insurers than among banks.",
       "Life insurers have a sound amount of own funds. Since 2022, life insurers' solvency ratios without transitional measures have increased due to rises in interest rates. This is mainly because their liabilities have considerably longer maturities than their investments. Consequently, when interest rates are raised, liabilities depreciate in value more sharply than investments. In the second quarter of 2024, the median regulatory solvency ratio of German life insurers was just over 300 %. Even the 10 % of life insurers with the lowest capitalisation exhibited solvency ratios of as high as nearly 200 %."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q022",
@@ -323,7 +344,8 @@
     "contexts": [
       "Corporate insolvencies have risen further in 2024. After the number of corporate insolvencies dropped sharply in 2020 and 2021 as a result of government assistance measures and the suspension of the obligation to file for insolvency, this figure has risen again considerably since 2022. In the first half of 2024, it was 25 % higher than in the previous year. However, when viewed over the long term, the number of corporate insolvencies was not exceptionally high.",
       "In this scenario, where annual growth in real gross domestic product (GDP) is 2.5 percentage points lower than in the baseline scenario, the loss allowance ratio is more than 0.6 %. This corresponds to a decline in CET1 ratios of only 7 basis points compared with the baseline. In view of German banks' capital reserves, these additional losses seem manageable. If the economy performs better, however, this development in the loss allowance ratio could soon peak."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q023",
@@ -338,7 +360,8 @@
     "contexts": [
       "German real estate funds' existing liquidity buffers reduce liquidity risk. The liquid funds of German retail real estate funds – i.e. bank deposits, money market fund shares and liquid securities – are well above the liquidity ratio of 5 % of fund assets stipulated by regulators. On a weighted average, bank deposits alone recently accounted for around 11 % of assets held by open-end retail real estate funds. The minimum holding periods and notice periods introduced in Germany in 2013 partly mitigate liquidity risk in retail real estate funds by protecting against sudden strong outflows. Since then, investors in retail real estate funds are required to announce fund share redemptions twelve months in advance and are subject to a minimum holding period of 24 months.",
       "The growing interconnectedness within the fund sector may result in open-end securities funds amplifying shocks in the financial system. To diversify their portfolios and have access to liquidity, securities funds hold shares of other securities-based funds (cross-holdings). This interconnectedness within the fund sector has grown in many significant fund jurisdictions since the global financial crisis. In Germany, shares of other funds accounted for as much as 23 % of fund assets at the end of the period under review."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q024",
@@ -354,7 +377,8 @@
     "contexts": [
       "This is why the analysis also looks at a carbon price increase, specifically of €100/tCO2 within one quarter for the main scenario. The increase starts from the current carbon price of around €75/tCO2. A baseline with no further carbon price increase is used as a benchmark. The effects described below should therefore be understood as deviations in the main scenario from this baseline pathway.",
       "In the main scenario described above, disclosure is assumed to be imperfect, with households wrongly attributing 20 % of emissions to zero-emission sectors. The scenario presented in the following assumes full mandatory disclosure. In addition to the €100/tCO2 carbon price increase, the degree of disclosure is also upped from 80 % to 100 %. Enhanced disclosure significantly reduces the costs of the carbon price increase. Enterprise values drop by roughly 7 %, around three-quarters less than in the main scenario. GDP shrinks by around one-quarter less than in the main scenario, falling by slightly more than 1.1 %."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q025",
@@ -369,7 +393,8 @@
     "contexts": [
       "According to a Bundesbank survey, lapse rates in Germany would only surge if low-risk bank investments promised an annual return of at least 6 %. In Germany, life insurance policies often also cover other risks, e.g. occupational disability. This reduces customers' incentive to let their life insurance policies lapse. While the risk of an upsurge in policy lapses among German life insurers therefore remains limited, it cannot be ruled out in the event of particularly adverse developments, such as multiple coinciding shocks.",
       "A key prerequisite for life insurers to invest countercyclically during periods of stress is that they have a sufficient amount of own funds. If they had low levels of own funds, life insurers could sell risky assets to improve their solvency ratios during periods of stress. In so doing, they would procyclically reinforce the shock to the financial markets, thereby undermining the financial system's resilience."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q026",
@@ -384,7 +409,8 @@
     "contexts": [
       "As at the second quarter of 2024, German banks' balance sheet exposure to the global NBFI sector amounted to around 12 % of the aggregate total assets of the German banking system. The NBFI sector is particularly closely linked to German O-SIIs. In addition to direct interconnectedness, there is indirect interconnectedness in which non-contractual transmission channels play the central role in the transmission of shocks.",
       "In June 2024, German life insurers had just under €80 billion invested in commercial real estate, equating to just over 7 % of their total investments. Around one-third of commercial real estate investments are investments made using debt instruments such as loans and bonds. For example, around one-third of life insurers have excess regulatory capital exceeding their total investments in commercial real estate. Other life insurers, however, have invested more than three times their excess regulatory capital in commercial real estate, leaving them especially vulnerable."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q027",
@@ -398,7 +424,8 @@
     "contexts": [
       "According to surveys conducted by the Bundesbank, around 26% of firms in the real economy and financial sector used AI in 2024. In 2025, this figure already stood at 44%. Additional companies are planning to use AI starting in 2026. Use of AI in the financial and insurance sector is higher than average, at 54% in 2025. The information and telecommunications sector is the only industry to have a higher uptake.",
       "German financial institutions are already making greater use of AI, though its application in core areas of banking business, such as lending, has so far been minimal. However, small and medium-sized banks and savings banks in Germany (less significant institutions, or LSIs) mainly use AI in support processes and not in the core areas of their business. For example, AI is being deployed in automated internal processes (such as text generation and internal chatbots), fraud detection and prevention, and contact with customers. By contrast, AI has so far barely been used to assess creditworthiness and in trading."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q028",
@@ -413,7 +440,8 @@
     "contexts": [
       "In the course of 2025 thus far, the ratio between aggregate household debt and household disposable income decreased by approximately 0.5 percentage point to around 85%. The main reason for this was the continued low level of new lending. In previous years, the debt ratio had also been dampened by marked nominal wage growth, but this was significantly lower in 2025. Nevertheless, the rise in nominal wages over recent years has resulted in a reduction of household debt in real terms.",
       "For most households, interest rate risk remains low for the time being. The risks associated with follow-up financing appear limited, as most interest rate fixation periods are long. By 2027, around 20% of the outstanding volume of residential real estate loans will have to be renewed. The interest rates on these types of loans could increase from around 2.5% at present to more than 4% through renewal."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q029",
@@ -427,7 +455,8 @@
     "contexts": [
       "Overall, German banks hold around €368 billion in government bonds, which corresponds to 3.6% of their total assets. This is below average compared with the mean of 4% for EU banks. The total portfolio of securities, including corporate bonds, equities and fund shares, amounts to €1,410 billion (around 14% of total assets). The share of government bonds in total assets appears moderate.",
       "Since the beginning of 2019, the share of German government bonds in German banks' government bond portfolio has fallen by 14 percentage points. At the end of 2024, it stood at only 33%. While the share of EU government bonds (excluding Germany) and US government bonds has remained virtually constant (at 25% and 12%, respectively), the share of other government bonds has almost doubled. At the end of 2024, this share stood at 30%."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q030",
@@ -441,7 +470,8 @@
     "contexts": [
       "Before the US tariff announcement, some 6% of retail securities funds recorded net outflows in excess of their bank deposits. This share tripled to more than 16% within a few days of the US tariff announcement. As a result, nearly one in six funds had to make portfolio adjustments and sell off securities. However, the announcement of a 90-day tariff suspension calmed the market.",
       "The announcement of extensive US tariffs on 2 April 2025 temporarily worsened the liquidity situation for Germany's open-end retail fund sector considerably. Retail securities funds saw returns collapse suddenly, accompanied by high net outflows. Some funds were forced to sell securities as their bank deposits were insufficient to cover the net outflows in full. The return shocks, as well as the scale and pace of net outflows affecting these funds in early April 2025, were similar to the levels seen at the outbreak of the COVID-19 pandemic in spring 2020."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q031",
@@ -454,7 +484,8 @@
     ],
     "contexts": [
       "The median regulatory solvency ratio of German life insurers has risen by 25 percentage points since the end of 2024. In the second quarter of 2025, it stood at 351%. The median solvency ratio was thus significantly above the 100% required by supervisors. The increase in solvency ratios since 2022 is mainly due to the higher interest rate level. This caused liabilities to fall more sharply in value than assets."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q032",
@@ -469,7 +500,8 @@
     "contexts": [
       "For Germany, the resulting losses could amount to around 0.13% of GDP in the first year. The direct short-term losses are therefore small. If the US tariffs were to remain in place permanently, this could also have a structural and thus longer-term impact on the outlook for the German economy. Reasons for this include a decline in exports to the United States, shifts in investment and altered supply chains.",
       "According to the Bundesbank's growth-at-risk model, the likelihood of particularly low growth rates has increased since the end of last year. The conditional 10% quantile of GDP growth is currently around minus 1.84% compared with minus 1.56% a year ago. That said, the estimated downside risks are significantly lower than during the monetary policy tightening cycle from mid-2022 to the end of 2023 or the global financial crisis."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q033",
@@ -484,7 +516,8 @@
     "contexts": [
       "The ratio of specific loss allowances to the lending volume has surpassed its mid-2022 low by more than 0.1 percentage point but is still at a relatively low level of just over 0.6%. Collective loss allowances started rising sooner than specific loss allowances and have been declining again slightly since the end of 2024. While specific loss allowances are usually only recognised when loans turn non-performing, collective loss allowances are set aside to cover latent credit risk.",
       "Regulatory capital adequacy in the banking system is good, with systemically important banks in particular having benefited from low risk weights. Systemically important banks calculate risk weights for their assets using an advanced approach that allows them to use their own risk models. Calculations in these risk models are based on actual defaults that occurred in the past. However, as these were fairly low, the risk weights derived from them could be on the low side."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q034",
@@ -499,7 +532,8 @@
     "contexts": [
       "German banks are subject to a currency-specific liquidity gap for the US market of just over US$70 billion. In the stress scenario considered here, the existing stock of HQLA in US dollars would therefore be insufficient to service outflows of funding in US dollars. The liquidity gap is in decline, though, having stood at just over US$100 billion in mid-2023.",
       "Around 77% of the securities portfolio of the German investment fund sector is also held by investment funds in Luxembourg. The German investment fund sector has an overlap of 59% with investment funds in Ireland. Joint holdings of shares of US non-financial firms are particularly high in this context. German insurers and pension funds are indirectly most closely linked to investment funds in Germany and Luxembourg."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q035",
@@ -514,7 +548,8 @@
     "contexts": [
       "Around one-third of securities funds in the German retail fund sector held less than 1% of their net asset value in bank deposits in the second quarter of 2025. Liquidity risk in the fund sector could quickly escalate again in the event of fresh turmoil in the financial markets. From a financial stability perspective, low liquidity buffers are relevant given the risk of net outflows, as asset sales can trigger a downward spiral of falling asset prices and further outflows in an environment of shrinking liquidity.",
       "Moreover, the minimum holding and notice periods that were introduced in Germany in 2013 limit liquidity risk for retail real estate funds. Fund investors have had to hold any fund shares acquired since then for at least 24 months and give one year's notice for redemptions. These requirements take due account of illiquidity on the assets side of real estate funds and reduce the first-mover advantage. This makes outflows easier to plan for fund managers, allowing real estate sales to be completed in good time."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q036",
@@ -529,7 +564,8 @@
     "contexts": [
       "These structural challenges may increase credit risk in the corporate sector, as weak growth and declining profitability could impair firms' financial resilience and thus financial stability. The changing conditions at home and abroad are weakening the competitiveness of the German economy and significantly dampening potential growth, which is expected to average just 0.4% per year over the next few years.",
       "The non-performing loans ratio has risen significantly from its low at the end of 2022. Most of this increase was due to loans to the real estate sector at first. Now non-performing loans are increasing more broadly due to the weakness in economic activity. The non-performing loans ratio seemed to be in decline at the beginning of 2025, but this was due to a few large banks scaling back non-performing US real estate loans. Non-performing loans increased again in the second quarter."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q037",
@@ -544,7 +580,8 @@
     "contexts": [
       "The European banking system's claims on the global NBFI sector amount to about 10% of aggregate total assets. The share of such claims is around 13% in the German banking system and has risen by around 2 percentage points since 2020. German banks' liabilities to domestic and foreign NBFIs have risen by around 1.5 percentage points since 2020 to roughly 14% of aggregate total assets. A large proportion (around 70%) of both the claims on and liabilities to NBFIs are concentrated in systemically important German banks.",
       "The ratio of NBFIs' deposits to the banking system's high-quality liquid assets (HQLA) stands at around 40%. Roughly one-half of these deposits are overnight deposits. The deposits that NBFIs hold with banks are often NBFIs' liquidity buffers. They can be withdrawn at short notice if, for example, investment funds need resources to service redemptions of shares."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q038",
@@ -559,7 +596,8 @@
     "contexts": [
       "If AI systems were to be adopted on a larger scale to make decisions on lending or investments in financial markets, it could both mitigate and heighten risks. The use of AI models that have been trained on similar datasets could lead to increasingly herd-like behaviour. This could amplify excesses in financial markets and increase volatility. In Europe, the EU Artificial Intelligence Act (AI Act) and the EU General Data Protection Regulation (GDPR) impose limits on the degree of autonomy permitted to AI models when it comes to decisions about individuals.",
       "New concentration risks could arise if large sections of the financial system are dependent on the products of a few AI system providers. This is why broad-based and forward-looking monitoring is important, so as to pick up on developments at an early stage and gauge risks to financial stability. AI could also have an indirect impact on financial stability via the real economy. AI might place traditional business models under pressure and, as automation increases in certain areas, lead to a decline in labour demand."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q039",
@@ -574,7 +612,8 @@
     "contexts": [
       "Taken in isolation, Germany's expansionary fiscal policy will probably push up the general level of euro area interest rates, placing a strain on Member States with higher debt levels in particular by widening their yield spreads. When significantly higher government spending in Germany was announced at the beginning of March 2025, yields on longer-dated German government bonds rose. The rise in yields on ten-year German government bonds has receded in part, but not fully.",
       "Because the German banking system is closely interconnected with other European financial systems, it is vulnerable to sudden interest rate increases on government bonds issued by other European countries. First, higher interest rates on government bonds lead to market value losses for European financial intermediaries holding these government bonds. German financial intermediaries are affected as well, although their immediate losses seem to be limited. Second, the share of domestic government bonds on the balance sheets of European banks, insurers and funds remains high, especially in Spain and Italy. Because the German banking system is closely linked to other European financial systems, contagion effects could lead to additional losses at German banks."
-    ]
+    ],
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q040",
@@ -589,7 +628,8 @@
     "contexts": [
       "Euro area growth has continued to recover at a moderate pace. Euro area GDP grew by 0.9% in 2024. Growth was driven by private and government consumption and net exports, albeit with large differences across countries.",
       "Growth expectations for 2025 have been revised downwards as weak external demand and domestic structural challenges persist. Low productivity growth and a loss of competitiveness, especially in industrial sectors such as the automotive industry, continue to weigh on economic growth."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q041",
@@ -603,7 +643,8 @@
     "contexts": [
       "In the fourth quarter of 2024, RRE prices in the euro area increased by 4.2% year on year, following a decline of 1.1% in the equivalent quarter of the previous year. The situation differed markedly among countries. While some countries experienced robust price growth, a few still witnessed a contraction in prices, even though this was generally less pronounced than in the previous year.",
       "The recent correction in house prices has reduced estimates of overvaluation in most countries. Combined with improved financial conditions, this has led to a decrease in tail risks compared with the situation at the peak of the cycle in 2022."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q042",
@@ -618,7 +659,8 @@
     "contexts": [
       "Bank profitability stabilised in 2024, albeit at still-high levels, as net interest income growth had stalled due to falling interest rates. Banks' trailing return on equity (ROE) continued to hover at around 9.5% during 2024, a level it first reached in the third quarter of 2023. Growth in net interest income made a positive contribution to the change in ROE on an annual basis, but it stalled in the second half of 2024 due to a combination of slightly tighter margins and subdued volume growth.",
       "The dispersion in bank profitability has remained wide, with a quarter of banks showing an ROE of above 14% and another quarter of banks recording less than 6%."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q043",
@@ -632,7 +674,8 @@
     "contexts": [
       "In the euro area, gross notional exposures to gold derivatives amounted to €1 trillion in March 2025, an increase of 58% since November 2024. A significant share of these derivatives contracts are traded over-the-counter (OTC) and are not centrally cleared. Approximately 48% of gold derivatives contracts have a bank counterparty.",
       "Euro area investors are exposed to gold through derivatives, pointing to large foreign counterparty exposures. The majority of euro area banks' gold derivative exposures are with non-euro area domiciled counterparties, suggesting some exposure to external shocks in the gold market."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q044",
@@ -646,7 +689,8 @@
     "contexts": [
       "Total exposures to EU sectors for which a significant share of output is reliant on either exports to or imports from US goods markets represent 9.6% of all NFC exposures (1.5% of total assets). However, the share of lending at risk varies materially across euro area banking sectors and individual institutions.",
       "Euro area banks' exposures to sectors that are reliant on the United States as a trading partner may face rising credit risk as trade restrictions are increased. The euro area banking system's exposure to sectors which could be impacted by US tariffs can be calculated using granular data on banks' loans and debt security holdings."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q045",
@@ -661,7 +705,8 @@
     "contexts": [
       "As at the end of 2024, the median bank would see its net interest income fall by 11% relative to the baseline under such a scenario, but there is a wide dispersion across banks, with an interquartile range of between -6% and -16%. Finally, in spite of a still weak macroeconomic outlook for 2025, analysts expect only a slight increase in banks' cost of risk in 2025 and a stabilisation in 2026.",
       "First, new NPLs will likely require higher provisions as they age, with the average provision coverage on NPLs rising from 44% when they are less than a year old to 68% for loans that are more than two years old (as of end-2024). Second, the share of government-guaranteed loans stock will continue to decrease in 2025, with 42% estimated to have already left the portfolio since the end of 2022."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q046",
@@ -676,7 +721,8 @@
     "contexts": [
       "During the low-for-long interest rate environment, the deposit franchise was a liability in economic terms for virtually all euro area banks as they were unable to generate a spread income in excess of their operating expenses. The exit from the low interest rate environment pushed the deposit franchise value back into positive territory, turning it into an economic asset. Across the euro area, positive deposit franchise values have been observed when long-term interest rates have exceeded 1.8%.",
       "The market share of digital banks increased from 3.1% of total assets in 2019 to 3.9% in 2024 thanks to the expansion of established players and the entry of new competitors. The further growth of digital banks might be good for consumers, who would benefit from more competition, and could push incumbents towards improving their service offer. It may, however, also become a threat to financial stability if the business models of traditional banks are disrupted and incumbents rapidly lose the deposit franchise that provides stable funding."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q047",
@@ -691,7 +737,8 @@
     "contexts": [
       "Euro area non-banks' investments include sizeable exposures to trade-intensive economic sectors. Around half of all European stocks held by the NBFI sector come from issuers that rely to a significant extent on both imports from and exports to the United States. Rising protectionism and trade policy uncertainty are likely to weigh on the valuations of these stocks.",
       "ICPFs – especially pension funds – experienced a rise in margin calls on these derivative exposures following the announcement of US tariffs at the beginning of April, which they appear to have been able to meet. However, further sharp or sudden changes in either financial market volatility or long-term interest rates could result in renewed, and possibly large, margin calls. This would leave ICPFs vulnerable to potentially rising liquidity pressures that could, in turn, require them to sell assets. A decline in high-quality liquid assets in insurers' portfolios suggests that the sector is not as well prepared to deal with liquidity shocks from margin calls as it was in the past."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q048",
@@ -706,7 +753,8 @@
     "contexts": [
       "Additionally, the profitability outlook for the insurance sector remains uncertain, despite signs of improvement for life insurers. Underwriting profitability – as measured by the ratio of premiums written to the sum of net claims incurred and expenses – remains strong for non-life insurers, while life insurers have seen improvements over the course of 2024. However, the outlook for underwriting profitability remains uncertain for both sectors. Non-life insurers also face growing challenges from the physical risks associated with climate-related natural catastrophes. The increasing frequency and severity of natural catastrophes due to climate change are causing growing economic losses through the destruction of physical property and infrastructure and a reduction in economic activity.",
       "A widening insurance protection gap is also a source of systemic risk. Physical damage has a negative impact on asset values, leading to the repricing of the loans and securities of financial institutions in higher-risk areas. It also increases the potential burden on the public sector, both in terms of the macroeconomic risks and in terms of the greater fiscal spending required to cover uninsured losses. This is particularly relevant given that the more highly indebted euro area countries are also those facing the largest economic costs from climate-related natural catastrophes, most of which are uninsured."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q049",
@@ -721,7 +769,8 @@
     "contexts": [
       "The ECB's November 2024 Consumer Expectations Survey covering selected euro area countries indicated that, on average, 9.7% of survey respondents (or someone in one of these households) owned crypto-assets, down slightly from the November 2022 figure. Most owners of crypto-assets have a relatively small exposure: 54% of respondents reported holdings of below €1,000 and 91% of respondents reported holdings of below €20,000. Translating this into actual holdings suggests that households hold at least €75 billion in crypto-assets. This estimate represents about 0.23% of household financial assets and 3% of total crypto-asset market capitalisation.",
       "Euro area significant institutions provided €4.7 billion of custody services related to crypto-assets and crypto-related investment products in 2024, up from around €400 million in 2023. Moreover, banks increasingly offer crypto-related services such as brokerage and trading."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q050",
@@ -736,7 +785,8 @@
     "contexts": [
       "The S&P 500 climbed 9.5% on 9 April, its highest gain since 2008, and euro area equities have also seen unusually strong gains since 9 April. Driven by further positive news on easing trade tensions, in particular between the United States and China, US and euro area equities had mostly recovered the losses incurred after 2 April by the cut-off date of this edition of the Financial Stability Review.",
       "The stock prices of the seven dominant US technology companies, known collectively as the 'Magnificent 7', fell by 16.5% between the release of the model and 2 April, which also affected euro area technology sector valuations and the wider market. Trade tensions then led to further price fluctuations."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q051",
@@ -751,7 +801,8 @@
     "contexts": [
       "A 1 standard deviation increase in trade policy uncertainty leads to a decline in euro area bank stock prices of 1.9% on impact and 10.4% after six months. It also has a statistically significant impact on bank CDS spreads, which increase by 12 basis points after six months. Furthermore, bank bond spreads increase by 7 basis points after six months.",
       "The resurgence of trade tensions and tariff-related news has put pressure on equity prices in some euro area industries. The automotive, consumer products, IT, industrials, materials and financial sectors experiencing sizeable declines. Market repricing remains a prominent risk to euro area financial stability, and the potential for further US trade policy shocks to euro area markets remains high."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q052",
@@ -766,7 +817,8 @@
     "contexts": [
       "Population ageing poses significant fiscal challenges for euro area sovereigns via higher ageing-related costs and a shrinking tax base. On the one hand, a growing number of retirees implies ageing-related spending rising from levels which are already high, including on pensions, health care and long-term care. On the other hand, a shrinking working-age population may result in lower personal income tax revenues and lower social security contributions.",
       "Persistent fiscal pressures may jeopardise sovereign debt sustainability over the medium to long term. In particular, higher dependency ratios are associated with higher interest rate-growth differentials — a key metric in sovereign debt sustainability analysis. This widening gap is likely due to two main factors: first, the anticipated rise in future debt levels, which elevates default risks and consequently drives up the interest rates that governments must pay on their debt; and second, the slowing economic growth observed in ageing populations."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q053",
@@ -780,7 +832,8 @@
     "contexts": [
       "Their earnings have been consistently robust, with return on equity levels averaging close to 10% in 2025 albeit with persistent cross-country variation (see Section 3.1). Banks' resilience has also been underpinned by capital and liquidity ratios well above regulatory requirements.",
       "Sound fundamentals and expectations of higher dividends supported a substantial increase in banks' price-to-book valuations that started in early 2025 (see Box 3). However, rising concerns about their exposure to private markets and the potential of AI to disrupt their business models triggered a decline in bank stock valuations in early 2026 that continued after the war broke out in the Middle East."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q054",
@@ -794,7 +847,8 @@
     "contexts": [
       "Banks' direct exposures to the region are small, at around 0.6% of their total assets (Chart 4, panel b), and concentrated among a few banks. Nevertheless, a prolonged shock could have material second-round effects, especially for euro area firms operating in sectors that are simultaneously trade, energy and interest rate sensitive, such as manufacturing, wholesale and retail, or electricity.",
       "Euro area banks' asset quality may deteriorate if macro-financial conditions worsen markedly as a result of the war in the Middle East. Euro area banks' non-performing loan ratios remain close to historical lows in aggregate. However, some deterioration is evident in SME and consumer lending, with notable variation across countries."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q055",
@@ -809,7 +863,8 @@
     "contexts": [
       "market activity remains weak across all sectors, with euro area transaction volumes still about 60% below their 2019 peak (Chart 1.10, panel b). At the same time, structural headwinds continue to weigh on parts of the market, contributing to a growing divergence between prime and non-prime segments. This is particularly evident in office markets, where the shift towards hybrid working practices continues to dampen demand and the outlook for lower-quality assets remains especially challenging.",
       "Commercial real estate (CRE) markets have stabilised during monetary easing, yet structural challenges remain. In recent quarters, the share of investors that consider the CRE market to be experiencing an upswing has remained broadly stable but subdued, at below 50%."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q056",
@@ -823,7 +878,8 @@
     "contexts": [
       "Euro area non-banks hold over 50% of outstanding long-dated EGBs and are thus particularly exposed to valuation losses when long-term interest rates rise. Investor composition in EGB markets depends heavily on the maturity bucket concerned: whereas banks and foreign investors generally hold the largest share of EGBs, it is euro area non-banks that hold the majority of sovereign debt at very long maturities.",
       "Insurance corporations and pension funds typically hedge the duration gap on their balance sheets by holding long-term bonds and acting as fixed-rate receivers in interest rate swaps, with banks as the main counterparties in such transactions. Swap rates for 30-year maturities have risen above ten-year rates, increasing the cost of hedging interest rate exposure at very long maturities."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q057",
@@ -837,7 +893,8 @@
     "contexts": [
       "Empirical analyses suggest that especially severe geopolitical shocks lead, on average, to outflows of 3.6% of total net assets from equity funds and 4.3% from corporate bond funds within six months (Chart 4.4). Following the Russian invasion of Ukraine, the actual equity fund flow response was benign by historical standards, while the corporate bond fund flow response exceeded model predictions. Since the outbreak of the war in the Middle East, both equity and corporate bond funds have faced outflows, as expected, although the magnitudes of such outflows have so far been relatively limited.",
       "The recent outbreak of war in the Middle East has led to significant flow responses in investment funds. The investment fund sector is generally highly sensitive to geopolitical shocks."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q058",
@@ -852,7 +909,8 @@
     "contexts": [
       "Banks further tightened credit standards for loans to firms in the first quarter of 2026, the tightening being greater than expected and the most significant since the third quarter of 2023. Banks expect to see further marked tightening in the second quarter.",
       "The impact of higher energy prices, through direct and indirect input linkages, extends well beyond electricity and energy products to sectors such as construction, metals and chemicals. At the same time, shipping costs and supply chain pressure indicators have turned upwards again, although they remain below their global financial crisis and pandemic-era peaks."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q059",
@@ -867,7 +925,8 @@
     "contexts": [
       "The direct exposures of euro area significant institutions to Middle East assets remain limited, accounting for around 0.6% of total assets. However, the debt servicing capacity of euro area borrowers is likely to weaken due to the higher cost of energy and raw materials, as well as lower aggregate demand. In the case of both the war in the Middle East and tariff uncertainties, indirect effects are likely to matter more for bank asset quality in the euro area than direct exposures.",
       "Banks' pre-provision operating profits, together with sizeable capital headroom, provide ample capacity to absorb increased credit losses. In fact, the aggregate annual pre-provision operating profits of the banking sector were more than four times loan loss provisions in 2025. Loan loss provision flows have shown no significant response so far, although a slight increase in provisions for Stage 2 loans in the fourth quarter of 2025 — linked primarily to SME portfolios — may be a sign that banks are beginning to acknowledge rising credit risks."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q060",
@@ -882,7 +941,8 @@
     "contexts": [
       "Euro area banks have continued to improve their solvency ratios by retaining earnings and transferring credit risk to non-bank investors. CET1 ratios have reached a new high, further increasing capital headroom and contributing to banking sector resilience. This growth is being driven mainly by retained earnings, which contributed more than 0.7 percentage points to the increase in the solvency ratio over the last year.",
       "The total outstanding stock of SRTs in the second half of 2025 pushed up aggregate bank capital ratios by about 0.5 percentage points. The rapid growth of the euro area SRT market suggests that these instruments are gaining importance in banks' capital management and that an increasing portion of corporate credit risk is being transferred from the banking sector to non-banks."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q061",
@@ -897,7 +957,8 @@
     "contexts": [
       "Concerns about private credit exposures and the potentially disruptive impact of artificial intelligence on business models triggered a decline in bank stock valuations on both sides of the Atlantic from February, especially for global systemically important banks. The decline further intensified following the outbreak of the war in the Middle East and valuations have remained volatile following the ceasefire agreement.",
       "The market valuations of euro area banks rose sharply between the start of 2025 and early 2026 to reach levels last seen before the global financial crisis. Euro area banks have converged with their US peers in terms of profitability, and consequently the gap between euro area and US bank valuations has narrowed significantly. By February 2026, the euro area aggregate P/B ratio had reached a level not seen since before the global financial crisis."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q062",
@@ -912,7 +973,8 @@
     "contexts": [
       "In the euro area, 79% of private credit funds are closed-ended as of the end of 2024 while the remaining funds allow for redemptions, exposing them to liquidity risk. Business development companies, and likely also other private credit funds, are characterised by a high share of payment-in-kind (PIK) loans, indicating potential cash flow strains.",
       "Relative value strategy funds tend to engage in highly leveraged basis trades, including in European sovereign bond markets, and have leverage ratios of around 25. Their leveraged positions may have to be unwound quickly if bond prices react sharply to geopolitical or risk sentiment shocks. In this way, hedge funds' procyclical deleveraging could exacerbate ongoing price moves and, through increased volatility in bond markets, erode the stable funding base of European governments."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q063",
@@ -927,7 +989,8 @@
     "contexts": [
       "As of the third quarter of 2025, alternative assets (such as private credit, private equity and infrastructure) accounted for 4.4% and 6.6% of the total assets of insurance corporations and pension funds respectively. Since 2022 the trend has been slightly upwards for insurance corporations and downwards for pension funds.",
       "Life-insurance corporations primarily hedge interest-rate risk because their liabilities are long dated and interest sensitive. Pension funds hedge foreign currency risk because their liabilities are single-currency while their assets are global. During times of macroeconomic uncertainty or elevated market volatility, hedging strategies may expose firms to a greater likelihood of margin calls, potentially leading to significant liquidity pressures."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q064",
@@ -942,7 +1005,8 @@
     "contexts": [
       "Significant NPL outflows, driven in particular by workouts and sales, have helped to keep net flows low and NPL ratios stable. Net NPL flows have remained relatively contained due to bank-internal workouts, cures, sales of non-performing and/or still-performing but risky portfolios, risk transfers for such portfolios through securitisations and forbearance on non-performing exposures. These measures have contributed to lower inflows and faster NPL turnover than in the past.",
       "Some potentially problematic corporate loans for German and French significant institutions may currently be still-performing forborne loans, which have increased markedly since the pandemic. Persistently elevated stocks of still-performing forborne loans may point to delayed recognition of credit deterioration, warranting scrutiny of how borrower fundamentals are incorporated."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q065",
@@ -956,7 +1020,8 @@
     "contexts": [
       "Dutch pension fund reform, among other factors, has contributed to a shift in institutional investors' demand for longer-dated debt, which has made the issuance of shorter-dated securities more attractive, increasing rollover and interest rate risks over the short to medium term.",
       "Rising uncertainty and upside risks to inflation since the outbreak of the war in the Middle East have led to an increase in euro area sovereign funding costs. Interest burdens are set to rise as a result, especially in countries with growing debt levels, further limiting the fiscal space available to tackle pressing issues."
-    ]
+    ],
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q066",
@@ -977,7 +1042,11 @@
       "Bundesbank-Financial-Stability-Review-2023.txt",
       "Bundesbank-Financial-Stability-Review-2025.txt"
     ],
-    "edge_case_notes": "Cross-document span. The 2023 figure (~600%) is significantly higher than the 2025 figure (351%), which is counterintuitive — a naive system might expect monotonic growth. A retrieval system must surface both passages and a reasoning system must correctly recognise that the ratio declined between these dates."
+    "edge_case_notes": "Cross-document span. The 2023 figure (~600%) is significantly higher than the 2025 figure (351%), which is counterintuitive — a naive system might expect monotonic growth. A retrieval system must surface both passages and a reasoning system must correctly recognise that the ratio declined between these dates.",
+    "source_documents": {
+      "76": "Bundesbank-Financial-Stability-Review-2023.pdf",
+      "87": "Bundesbank-Financial-Stability-Review-2025.pdf"
+    }
   },
   {
     "query_id": "Q067",
@@ -999,7 +1068,12 @@
       "Bundesbank-Financial-Stability-Review-2024.txt",
       "Bundesbank-Financial-Stability-Review-2025.txt"
     ],
-    "edge_case_notes": "Cross-document number-tracking query. The direction of change (falling) is consistent across both years but the magnitudes and baselines differ. A system that retrieves only one document will give a partial or wrong answer. The question does not name the specific year — 'mid-2024' and '2025' must both be identified."
+    "edge_case_notes": "Cross-document number-tracking query. The direction of change (falling) is consistent across both years but the magnitudes and baselines differ. A system that retrieves only one document will give a partial or wrong answer. The question does not name the specific year — 'mid-2024' and '2025' must both be identified.",
+    "source_documents": {
+      "43": "Bundesbank-Financial-Stability-Review-2024.pdf",
+      "53": "Bundesbank-Financial-Stability-Review-2025.pdf",
+      "54": "Bundesbank-Financial-Stability-Review-2025.pdf"
+    }
   },
   {
     "query_id": "Q068",
@@ -1021,7 +1095,12 @@
       "ECB-Financial-Stability-Reviews-2025.txt",
       "ECB-Financial-Stability-Reviews-2026.txt"
     ],
-    "edge_case_notes": "Cross-document factual comparison. ROE rose from ~9.5% (2024) to close to 10% (2025). A system that retrieves only one document will give a one-year answer. A system that confuses the years (e.g., assigning 9.5% to 2025) will fail RAGAS faithfulness."
+    "edge_case_notes": "Cross-document factual comparison. ROE rose from ~9.5% (2024) to close to 10% (2025). A system that retrieves only one document will give a one-year answer. A system that confuses the years (e.g., assigning 9.5% to 2025) will fail RAGAS faithfulness.",
+    "source_documents": {
+      "12": "ECB-Financial-Stability-Reviews-2026.pdf",
+      "48": "ECB-Financial-Stability-Reviews-2025.pdf",
+      "49": "ECB-Financial-Stability-Reviews-2025.pdf"
+    }
   },
   {
     "query_id": "Q069",
@@ -1042,7 +1121,11 @@
       "Bundesbank-Financial-Stability-Review-2023.txt",
       "Bundesbank-Financial-Stability-Review-2024.txt"
     ],
-    "edge_case_notes": "Cross-document policy evolution query. The question spans two years of assessment of the same policy. A system must retrieve the 2023 quantitative impact (€23.9bn) AND the 2024 confirmation of adequacy. Retrieval from only one year gives an incomplete picture."
+    "edge_case_notes": "Cross-document policy evolution query. The question spans two years of assessment of the same policy. A system must retrieve the 2023 quantitative impact (€23.9bn) AND the 2024 confirmation of adequacy. Retrieval from only one year gives an incomplete picture.",
+    "source_documents": {
+      "71": "Bundesbank-Financial-Stability-Review-2024.pdf",
+      "73": "Bundesbank-Financial-Stability-Review-2023.pdf"
+    }
   },
   {
     "query_id": "Q070",
@@ -1065,7 +1148,13 @@
       "Bundesbank-Financial-Stability-Review-2023.txt",
       "Bundesbank-Financial-Stability-Review-2024.txt"
     ],
-    "edge_case_notes": "3-way document span (requires checking all 5 source files). The two Bundesbank reviews have different climate scenarios — the 2023 one is a gradual 'Net Zero 2050' (−2.3% GDP over 5 years) and the 2024 one is an abrupt €100/tCO₂ shock (−1.4% GDP in 4 quarters). A system that retrieves only one will mix up the scenario types and magnitudes. The answer also requires recognising absence of this analysis in ECB documents."
+    "edge_case_notes": "3-way document span (requires checking all 5 source files). The two Bundesbank reviews have different climate scenarios — the 2023 one is a gradual 'Net Zero 2050' (−2.3% GDP over 5 years) and the 2024 one is an abrupt €100/tCO₂ shock (−1.4% GDP in 4 quarters). A system that retrieves only one will mix up the scenario types and magnitudes. The answer also requires recognising absence of this analysis in ECB documents.",
+    "source_documents": {
+      "98": "Bundesbank-Financial-Stability-Review-2023.pdf",
+      "99": "Bundesbank-Financial-Stability-Review-2023.pdf",
+      "123": "Bundesbank-Financial-Stability-Review-2024.pdf",
+      "124": "Bundesbank-Financial-Stability-Review-2024.pdf"
+    }
   },
   {
     "query_id": "Q071",
@@ -1084,7 +1173,8 @@
     "sources": [
       "Bundesbank-Financial-Stability-Review-2023.txt"
     ],
-    "edge_case_notes": "Date precision query. The answer is Q2 2023 specifically. A system that retrieves the 2025 document will find 351% (a lower figure for 2025) and produce a wrong answer. The question is deliberately ambiguous about which document to use — 'when did it first reach' forces the correct 2023 document."
+    "edge_case_notes": "Date precision query. The answer is Q2 2023 specifically. A system that retrieves the 2025 document will find 351% (a lower figure for 2025) and produce a wrong answer. The question is deliberately ambiguous about which document to use — 'when did it first reach' forces the correct 2023 document.",
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q072",
@@ -1103,7 +1193,8 @@
     "sources": [
       "Bundesbank-Financial-Stability-Review-2023.txt"
     ],
-    "edge_case_notes": "Exact-number query. The answer is €23.9 billion — a specific figure that cannot be paraphrased or approximated. A model that retrieves the 2024 document's discussion of the same package but without the €23.9bn figure will fail. Tests whether the retrieval brings back the quantitative impact statement."
+    "edge_case_notes": "Exact-number query. The answer is €23.9 billion — a specific figure that cannot be paraphrased or approximated. A model that retrieves the 2024 document's discussion of the same package but without the €23.9bn figure will fail. Tests whether the retrieval brings back the quantitative impact statement.",
+    "source_document": "Bundesbank-Financial-Stability-Review-2023.pdf"
   },
   {
     "query_id": "Q073",
@@ -1122,7 +1213,8 @@
     "sources": [
       "ECB-Financial-Stability-Reviews-2025.txt"
     ],
-    "edge_case_notes": "Exact date + exact percentage query. Both 9 April and 9.5% must be correct. A model that confuses this with the 2 April tariff announcement (the trigger, not the rebound) fails. Tests date/number co-retrieval precision."
+    "edge_case_notes": "Exact date + exact percentage query. Both 9 April and 9.5% must be correct. A model that confuses this with the 2 April tariff announcement (the trigger, not the rebound) fails. Tests date/number co-retrieval precision.",
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q074",
@@ -1141,7 +1233,8 @@
     "sources": [
       "Bundesbank-Financial-Stability-Review-2025.txt"
     ],
-    "edge_case_notes": "Ambiguity trap: the 2023 FSR gives a critical interest rate of 4.3% (under the fully-loaded new methodology) as the going-concern risk threshold in a wave-of-lapses scenario. The 2025 FSR gives a different figure — 6% — as the threshold above which a wave of lapses 'would be substantial', based on a 2023 Bundesbank survey. A system that retrieves the 2023 critical interest rate methodology entry (4.3%) instead of the 2025 survey result (6%) will give a wrong answer. Tests cross-document disambiguation of the same concept measured differently."
+    "edge_case_notes": "Ambiguity trap: the 2023 FSR gives a critical interest rate of 4.3% (under the fully-loaded new methodology) as the going-concern risk threshold in a wave-of-lapses scenario. The 2025 FSR gives a different figure — 6% — as the threshold above which a wave of lapses 'would be substantial', based on a 2023 Bundesbank survey. A system that retrieves the 2023 critical interest rate methodology entry (4.3%) instead of the 2025 survey result (6%) will give a wrong answer. Tests cross-document disambiguation of the same concept measured differently.",
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q075",
@@ -1160,7 +1253,8 @@
     "sources": [
       "ECB-Financial-Stability-Reviews-2025.txt"
     ],
-    "edge_case_notes": "Multiple-number query — requires 9.7%, €75 billion, and 0.23% all to be present. Also tests temporal precision: the survey was conducted in November 2024 but published in the May 2025 FSR. A system that hallucinates any number fails faithfulness."
+    "edge_case_notes": "Multiple-number query — requires 9.7%, €75 billion, and 0.23% all to be present. Also tests temporal precision: the survey was conducted in November 2024 but published in the May 2025 FSR. A system that hallucinates any number fails faithfulness.",
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q076",
@@ -1179,7 +1273,8 @@
     "sources": [
       "ECB-Financial-Stability-Reviews-2025.txt"
     ],
-    "edge_case_notes": "Terminology ambiguity query. 'Magnificent 7' is a colloquial term not defined in a standard financial glossary. A system must retrieve the passage that names all seven companies. A system that retrieves only the passage mentioning the 16.5% decline without the composition list gives an incomplete answer."
+    "edge_case_notes": "Terminology ambiguity query. 'Magnificent 7' is a colloquial term not defined in a standard financial glossary. A system must retrieve the passage that names all seven companies. A system that retrieves only the passage mentioning the 16.5% decline without the composition list gives an incomplete answer.",
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q077",
@@ -1199,7 +1294,8 @@
     "sources": [
       "Bundesbank-Financial-Stability-Review-2025.txt"
     ],
-    "edge_case_notes": "Ambiguous direction query. The document says 'deteriorated on balance' but includes an explicit counterexample (interest rate risk improved). A naive system that only finds passages about credit deterioration misses the caveat. Tests whether the model retrieves and faithfully represents mixed-direction assessments."
+    "edge_case_notes": "Ambiguous direction query. The document says 'deteriorated on balance' but includes an explicit counterexample (interest rate risk improved). A naive system that only finds passages about credit deterioration misses the caveat. Tests whether the model retrieves and faithfully represents mixed-direction assessments.",
+    "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
   {
     "query_id": "Q078",
@@ -1219,7 +1315,8 @@
     "sources": [
       "ECB-Financial-Stability-Reviews-2026.txt"
     ],
-    "edge_case_notes": "Apparent contradiction query. Two statements from different sections of the same document appear to conflict. A system that retrieves only the first passage answers the NII decline part but misses the forward-looking reconciliation. Tests whether multi-passage retrieval and synthesis capability are exercised."
+    "edge_case_notes": "Apparent contradiction query. Two statements from different sections of the same document appear to conflict. A system that retrieves only the first passage answers the NII decline part but misses the forward-looking reconciliation. Tests whether multi-passage retrieval and synthesis capability are exercised.",
+    "source_document": "ECB-Financial-Stability-Reviews-2026.pdf"
   },
   {
     "query_id": "Q079",
@@ -1238,7 +1335,8 @@
     "sources": [
       "ECB-Financial-Stability-Reviews-2025.txt"
     ],
-    "edge_case_notes": "Exact two-number query: €30 billion total and €13 billion insured must both be present and correctly attributed to 2024 losses in Europe. A model that hallucinates either figure or conflates with other years fails. The second context grounds the systemic risk framing cited in the ground truth."
+    "edge_case_notes": "Exact two-number query: €30 billion total and €13 billion insured must both be present and correctly attributed to 2024 losses in Europe. A model that hallucinates either figure or conflates with other years fails. The second context grounds the systemic risk framing cited in the ground truth.",
+    "source_document": "ECB-Financial-Stability-Reviews-2025.pdf"
   },
   {
     "query_id": "Q080",
@@ -1257,7 +1355,8 @@
     "sources": [
       "Bundesbank-Financial-Stability-Review-2024.txt"
     ],
-    "edge_case_notes": "Definition + document-identification query. The term 'pull-to-par' is technical and document-specific. The question asks both for the definition AND which document introduced it in this context. A system that retrieves the 2025 Bundesbank document (which discusses unrealised losses separately) without the 2024 definition passage fails on both sub-questions."
+    "edge_case_notes": "Definition + document-identification query. The term 'pull-to-par' is technical and document-specific. The question asks both for the definition AND which document introduced it in this context. A system that retrieves the 2025 Bundesbank document (which discusses unrealised losses separately) without the 2024 definition passage fails on both sub-questions.",
+    "source_document": "Bundesbank-Financial-Stability-Review-2024.pdf"
   },
   {
     "query_id": "Q081",
