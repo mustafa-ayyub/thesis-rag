@@ -37,6 +37,54 @@ Key facts:
 
 ---
 
+## The Daily Loop (validation session, start to finish)
+
+The full sequence when you push changes and want fresh validation numbers.
+Every command runs on the **laptop** unless the comment says `cluster`.
+
+```bash
+# 1. laptop: commit + push
+git add -A && git commit -m "..." && git push
+
+# 2. cluster: pull (if you changed code) + submit the 4 h session job
+ssh u29661@glogin-gpu.hpc.gwdg.de 'cd ~/thesis-rag && git pull && sbatch cluster/slurm_interactive.sh'
+# → "Submitted batch job <ID>" — remember the ID
+# (If you pushed data/config only, the pull is harmless anyway — do it, it's 3 s)
+
+# 3. check status — as often as you like
+./scripts/check_gpu.sh <ID>
+# PENDING → shows planned node + estimated start time. Nothing to do; it auto-starts.
+# RUNNING → shows node + log tail.
+
+# 4. wait for readiness: the log must say "Both models ready."
+#    (models take ~1–2 min to load after the job starts)
+./scripts/check_gpu.sh <ID>
+
+# 5. laptop: open the tunnel (keep this terminal open the whole session)
+./scripts/tunnel.sh <node>
+
+# 6. laptop, other terminal: verify the tunnel actually works
+curl -s http://localhost:8000/health     # must print {"status":"ok"}
+# (give the tunnel ~10 s to finish connecting after launch — it prints its
+#  banner before ssh has bound the port)
+
+# 7. laptop: flip the switch, then run
+#    config/settings.yaml → gpu.remote_url: "http://localhost:8000"
+#    DO THIS ONLY AFTER step 6 printed {"status":"ok"}. It tells the pipeline
+#    to send model calls through your tunnel instead of looking for local GPUs.
+#    (It's "" the rest of the time — see teardown below.)
+.venv/bin/python scripts/validate_retrieval.py
+
+# 8. tear down (in this order)
+#    a) Ctrl+C in the tunnel terminal
+#    b) ssh u29661@glogin-gpu.hpc.gwdg.de 'scancel <ID>'
+#    c) config/settings.yaml → gpu.remote_url: ""
+#       (forget this and the next laptop run will fail with "Connection
+#        refused" on localhost:8000)
+```
+
+---
+
 ## The Commands
 
 ### A. One-shot embedding (after re-parsing/re-chunking documents)
@@ -63,16 +111,21 @@ ssh u29661@glogin-gpu.hpc.gwdg.de 'cd ~/thesis-rag && sbatch cluster/slurm_inter
 ### C. Check any job's status (the command you'll use most)
 
 ```bash
-ssh u29661@glogin-gpu.hpc.gwdg.de 'squeue --me --start'
+./scripts/check_gpu.sh <ID>        # one-liner: state + node + log tail
+ssh u29661@glogin-gpu.hpc.gwdg.de 'squeue --me --start'   # raw version
 ```
 
 | What you see | Meaning |
 |---|---|
-| `PENDING` | waiting for a free node — **nothing to do**, SLURM starts it automatically |
-| `RUNNING` + node name (e.g. `ggpu021`) in the last column | **the GPU is yours**; `TIME` = how long it has run |
+| `PENDING` / `PD` | waiting for a free node — **nothing to do**, SLURM starts it automatically. With `--start`, the `START_TIME` column is SLURM's **estimated** start (can drift if the node stays busy); the last column is the wait reason, e.g. `(TopOfQueue)` = you're first in line |
+| `RUNNING` + node name (e.g. `ggpu021`) | **the GPU is yours**; the time column = how long it has run |
 | *(no rows)* | job is over (finished, failed, or cancelled) — check the log (D) |
 
-**Time left on a reservation** = `4:00:00` − `TIME` (for interactive jobs).
+**"GPU is yours" is not "ready to use".** Two more steps:
+1. the log must contain `Both models ready.` (model loading takes ~1–2 min)
+2. your tunnel must be up and `curl -s http://localhost:8000/health` must return `{"status":"ok"}`
+
+**Time left on a reservation** = `4:00:00` − TIME (for interactive jobs).
 Need more? Submit command B again later — a fresh 4 h.
 
 **How busy is the partition?** (why a job might wait)
@@ -127,13 +180,17 @@ Do these **in order**, each in its own terminal:
    ```bash
    ./scripts/tunnel.sh ggpu021
    ```
-2. Terminal 2 — set `gpu.remote_url: "http://localhost:8000"` in
-   `config/settings.yaml` (one time), then:
+2. Terminal 2 — verify the tunnel works, THEN set the switch:
+   ```bash
+   curl -s http://localhost:8000/health   # wait for {"status":"ok"}
+   ```
+   Only after that, in `config/settings.yaml`:
+   `gpu.remote_url: "http://localhost:8000"`, then:
    ```bash
    .venv/bin/python scripts/validate_retrieval.py
    ```
    First query takes ~30–60 s (models warming up); after that each query is
-   a couple of seconds.
+   a couple of seconds. Remember to reset `remote_url: ""` at teardown (H).
 
    Note: one full run makes 95 SAIA rewrite calls (the LLM is rate-limited).
    If you hit limit errors, add a small sleep between queries in
@@ -159,7 +216,8 @@ ssh u29661@glogin-gpu.hpc.gwdg.de 'scancel <ID>'
 | Job finished but no result file | Read the `.err` log (D) — last lines contain the traceback |
 | `Invalid account or account/partition combination` | Your account can't use that partition. You (KISSKI) can use `kisski`, `kisski-h100`, `grete:interactive` — not `grete:shared` |
 | `[Errno 101] Network is unreachable` + huggingface retries | Compute node tried the internet. Make sure the script exports `HF_HUB_OFFLINE=1`. If a NEW model is missing, download it on the **login node**: `ssh ... '~/thesis-venv-gpu/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download(\"<org>/<model>\")"'` |
-| Tunnel says connection refused | Node name wrong, or server not up yet. Check C for `RUNNING`, then log D for `Both models ready.` |
+| Tunnel says connection refused | Node name wrong, server not up yet, or tunnel still connecting. Wait ~10 s after launching the tunnel, then `curl -s http://localhost:8000/health`. Check C for `RUNNING` + "Both models ready." in log D |
+| Tunnel zombie: port 8000 accepts connections but requests time out | Network blip killed the path to the cluster. Kill it (`lsof -ti tcp:8000 \| xargs kill`) and re-run `./scripts/tunnel.sh <node>`. Keepalives in tunnel.sh now make the tunnel die on its own after ~45 s of silence — a hanging tunnel means you closed the wrong terminal or the node went down |
 | Laptop scripts fail with `Connection refused` / `httpx` errors | `remote_url` is set but no tunnel/GPU session is active. Start one (B/G) or reset `remote_url: ""` |
 | `ValueError ... require users to upgrade torch to at least v2.6` | venv torch too old to load the cached `.bin` models. On the **login node**: `~/thesis-venv-gpu/bin/pip install "torch>=2.6" --index-url https://download.pytorch.org/whl/cu124` (cu124, not cu121 — cu121 wheels stop at torch 2.5.1; Grete drivers 570 support cu124) |
 | `Qdrant not reachable` / `ConnectionError` on 6333 | `docker start thesis-qdrant`. If the container is gone entirely: `docker run -d -p 6333:6333 --name thesis-qdrant -v thesis-qdrant-data:/qdrant/storage qdrant/qdrant` |

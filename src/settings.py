@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import yaml
@@ -73,4 +74,16 @@ def load_settings(config_path: str = "config/settings.yaml") -> Settings:
     # from SAIA_API_KEY instead (YAML init values would otherwise win over env)
     saia_raw = raw.pop("saia", {})
     saia_raw.pop("api_key", None)
+    # env overrides for per-machine deployment (Docker, different GPU hosts);
+    # unset variables leave the YAML values untouched
+    qdrant_raw = dict(raw.get("qdrant") or {})
+    if host := os.environ.get("QDRANT_HOST"):
+        qdrant_raw["host"] = host
+    if port := os.environ.get("QDRANT_PORT"):
+        qdrant_raw["port"] = int(port)
+    raw["qdrant"] = qdrant_raw
+    gpu_raw = dict(raw.get("gpu") or {})
+    if remote_url := os.environ.get("GPU_REMOTE_URL"):
+        gpu_raw["remote_url"] = remote_url
+    raw["gpu"] = gpu_raw
     return Settings(saia=SaiaSettings(**saia_raw), **raw)

@@ -52,6 +52,44 @@ BGE-M3 and BGE-Reranker-v2-m3 run on GWDG's Grete GPU cluster (project `kisski-b
 See `cluster/` for SLURM scripts and `scripts/tunnel.sh` for the SSH tunnel helper.
 The `gpu.remote_url` setting in `config/settings.yaml` switches between local and remote GPU mode.
 
+## Running on another machine (Docker)
+
+Works on Linux/macOS/Windows. The image contains **only the orchestration code** —
+no torch, no model weights: embedding/reranking always runs on a GPU server
+(see `cluster/`), reached via `GPU_REMOTE_URL`.
+
+Prerequisites: Docker, a clone of this repo, a running GPU server
+(see `cluster/README.md`), and network access from this machine to it
+(directly, or via `scripts/tunnel.sh` on this machine).
+
+```bash
+# 1. configure
+cp .env.example .env
+#    SAIA_API_KEY=...
+#    GPU_REMOTE_URL=http://host.docker.internal:8000
+#    (host.docker.internal = this machine — use it when an SSH tunnel to the
+#     GPU server is bound on this machine's port 8000; use
+#     http://<gpu-host>:8000 when the server is directly reachable)
+
+# 2. start Qdrant + build the app image
+docker compose up -d qdrant
+docker compose build app
+
+# 3. first time on this machine only: copy data/ (documents/,
+#    chunks_export.json, vectors.json, queries/, results/) from the original
+#    machine, then load the index WITHOUT re-embedding:
+docker compose run --rm app python scripts/ingest.py --vectors-file data/vectors.json
+
+# 4. use it
+docker compose run --rm app python scripts/validate_retrieval.py
+```
+
+Notes:
+- Qdrant data lives in the `qdrant-data` Docker volume — deleting the volume
+  wipes the index (re-run step 3).
+- Re-embedding from scratch (no `vectors.json`) is done with a GPU batch job on
+  a GPU machine — see `cluster/README.md`.
+
 ## Development branches
 
 | Branch | Scope |
