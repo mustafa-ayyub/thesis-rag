@@ -7,14 +7,89 @@ Timeline: July 2026 – January 2027.
 
 ## Overview
 
-Controlled comparison of two RAG architectures sharing the same hybrid retrieval pipeline:
+Controlled comparison of two RAG architectures sharing an identical retrieval
+pipeline — only the control layer differs:
 
-| System | Description |
-|---|---|
-| **System A** | Standard RAG — fixed single-pass retrieval, one LLM call |
-| **System B** | MCP-Wrapped RAG — ReAct agent, self-correcting retrieval via MCP tool |
+| System | Description | Status |
+|---|---|---|
+| **System A** | Standard RAG — fixed single-pass retrieval, one LLM call | in progress (Month 3) |
+| **System B** | MCP-Wrapped RAG — ReAct agent, self-correcting retrieval via MCP tool | planned (Month 4) |
 
-Document corpus: ECB and Deutsche Bundesbank Financial Stability Reviews (~10–50 PDFs).
+**Research question:** How does wrapping a RAG pipeline as an MCP tool affect
+retrieval accuracy, response quality, and latency?
+
+**Corpus:** European Central Bank (ECB) and Deutsche Bundesbank Financial
+Stability Reviews. Currently 5 editions (665 pages): Bundesbank FSR 2023/2024/
+2025, ECB FSR 2025/2026. The corpus will grow to ~10–50 PDFs (400–600 pages)
+before the final evaluation. Documents contain prose, tables, charts, and
+images.
+
+**Benchmark:** 95 human-annotated queries (`data/queries/queries.json`) with
+ground-truth answers, supporting contexts, and source (document, page) pairs:
+
+| Type | Count | Role |
+|---|---|---|
+| `simple_factual` | 26 | single-step retrieval |
+| `multi_step` | 39 | answers spanning multiple passages/pages |
+| `edge_cases` | 15 | ambiguous, cross-edition, and other hard cases |
+| `no_retrieval` | 15 | out-of-corpus; excluded from retrieval metrics, used to test refusal |
+
+## Retrieval pipeline
+
+```
+PDF ─► parser        pdfplumber tables + pymupdf text; headers/footers/
+                     footnotes stripped; chart plot areas rejected (they are
+                     mis-detected as tables by pdfplumber)
+    ─► chunker       recursive text chunks (512 tokens max / 64 overlap,
+                     cl100k_base); each real table = one atomic markdown chunk
+    ─► indexer       BGE-M3 dense + sparse vectors (one forward pass) →
+                     multi-vector Qdrant points
+```
+
+```
+query ─► rewriter    SAIA qwen3.8-27b (thinking off) rewrites the question
+                     into a keyword-rich search query
+    ─► embedder      BGE-M3 → (dense 1024-d, sparse)
+    ─► hybrid search dense + sparse Qdrant queries merged via Reciprocal
+                     Rank Fusion (k=60) → top 20
+    ─► reranker      BGE-reranker-v2-m3 cross-encoder → top 5
+                     (top 10 during validation)
+```
+
+The retriever interface is frozen for the A/B comparison:
+`Retriever.retrieve(query: str) -> list[RetrievedChunk]`. System B wraps this
+exact pipeline as an MCP tool.
+
+## Benchmark metrics
+
+Retrieval quality is measured per query type on the 80 scored queries:
+
+- **P@5** — normalized precision: fraction of the query's relevant
+  (document, page) pairs found in the top 5 (a full hit scores 1.0)
+- **R@10**, **nDCG@10**, **MRR**
+
+Matching is on **(document, page)** pairs, not page alone — the corpus PDFs
+share page numbers, so a page number is only meaningful together with its
+document.
+
+**Current baseline** (2026-09-15, single-pass retrieval over the frozen
+pipeline):
+
+| Type | P@5 | R@10 | nDCG@10 | MRR |
+|---|---|---|---|---|
+| simple_factual (26) | 0.865 | 0.923 | 0.836 | 0.862 |
+| multi_step (39) | 0.650 | 0.778 | 0.613 | 0.625 |
+| edge_cases (15) | 0.750 | 0.750 | 0.601 | 0.683 |
+| pooled (80) | 0.739 | 0.820 | 0.683 | 0.713 |
+
+Run-to-run variance is ±0.03 at type level (LLM rewrite stochasticity). Six
+queries (Q004, Q008, Q012, Q033, Q036, Q076) are stable all-zero retrieval
+misses — the expected target set where System B's multi-pass retrieval is
+hypothesized to help.
+
+The baseline run predates two subsequent corrections (ground-truth page audit
+and chart-filter re-index); the reference baseline is re-recorded after the
+re-indexed corpus is validated.
 
 ## Setup
 
@@ -34,29 +109,57 @@ cp .env.example .env
 docker run -d -p 6333:6333 qdrant/qdrant
 ```
 
+## Usage
+
+```bash
+# Ingest the corpus (parse + chunk + embed + index; embedding needs a GPU
+# session — see "GPU compute")
+python scripts/ingest.py
+
+# Rebuild the index from pre-computed vectors (no GPU)
+python scripts/ingest.py --vectors-file data/vectors.json
+
+# Run the retrieval benchmark over all 95 queries (~12 min)
+python scripts/validate_retrieval.py
+# → data/results/retrieval/validation_<timestamp>.json
+
+# Tests
+pytest
+```
+
+Utility scripts: `scripts/export_pages_txt.py` exports per-page text dumps for
+ground-truth annotation/auditing; `scripts/inspect_table_pages.py` shows how
+the parser and chunker render individual pages.
+
 ## Project structure
 
 ```
 src/ingestion/   — PDF parsing, chunking, Qdrant indexing
 src/retrieval/   — embedding, hybrid search, reranking, query rewriting
-cluster/         — GPU server (FastAPI) and SLURM batch scripts for GWDG
-scripts/         — ingest and validation entry points
+cluster/         — GPU server (FastAPI) and SLURM scripts for GWDG
+scripts/         — ingest, validation, and utility entry points
 tests/           — pytest suite
 docs/            — design documents (chunking strategy, code standards)
-config/          — settings.yaml template
+config/          — settings.yaml
+data/            — documents, queries, results (mostly gitignored)
 ```
 
 ## GPU compute (GWDG / KISSKI)
 
-BGE-M3 and BGE-Reranker-v2-m3 run on GWDG's Grete GPU cluster (project `kisski-bingen-ma`).
-See `cluster/` for SLURM scripts and `scripts/tunnel.sh` for the SSH tunnel helper.
-The `gpu.remote_url` setting in `config/settings.yaml` switches between local and remote GPU mode.
+BGE-M3 and BGE-Reranker-v2-m3 run on GWDG's Grete GPU cluster (project
+`kisski-bingen-ma`). Batch embedding jobs run on KISSKI (A100); interactive
+model-server sessions run on Grete. See `cluster/README.md` for the full
+workflow (submit → status → tunnel → run → teardown), `scripts/check_gpu.sh`
+for job status, and `scripts/tunnel.sh` for the SSH tunnel helper.
+
+The `gpu.remote_url` setting in `config/settings.yaml` (or the
+`GPU_REMOTE_URL` env var) switches between local and remote GPU mode.
 
 ## Running on another machine (Docker)
 
-Works on Linux/macOS/Windows. The image contains **only the orchestration code** —
-no torch, no model weights: embedding/reranking always runs on a GPU server
-(see `cluster/`), reached via `GPU_REMOTE_URL`.
+Works on Linux/macOS/Windows. The image contains **only the orchestration
+code** — no torch, no model weights: embedding/reranking always runs on a GPU
+server (see `cluster/`), reached via `GPU_REMOTE_URL`.
 
 Prerequisites: Docker, a clone of this repo, a running GPU server
 (see `cluster/README.md`), and network access from this machine to it

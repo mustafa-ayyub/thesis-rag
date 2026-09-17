@@ -24,6 +24,16 @@ _TABLE_OVERLAP_THRESHOLD = 0.3
 # (corpus data: footnotes ≤ 8.4pt; body text ≥ 11pt; headings ≥ 11.4pt)
 _FOOTNOTE_SIZE_THRESHOLD = 9.0
 
+# pdfplumber mis-detects chart plot areas as tables. Detection heuristics:
+# - caption/header references a chart ("Chart 2.1.1")
+# - most cell lines are bare numbers (axis values, tick marks)
+# - cell lines contain axis-tick sequences ("2008 0910 1112 13..." / "0 1 2 3 4 5")
+_CHART_REF = re.compile(r"Chart\s+\d")
+_NUMERIC_LINE = re.compile(r"^[–\-−+]?[\d\s.,%€b]*$")
+_TICK_CONSECUTIVE = re.compile(r"(\d{2}){4,}")
+_TICK_SPACED = re.compile(r"^(?:\d{2,4}\s+){3,}\d{2,4}$")
+_CHART_NUMERIC_LINE_RATIO = 0.55
+
 
 @dataclass
 class PageContent:
@@ -105,6 +115,35 @@ def _process_page(
     )
 
 
+def _chart_reason(table: list[list[str]], title: str) -> str | None:
+    """Return a reason string if the table looks like a chart, else None.
+
+    Chart plot areas yield 2-3 column "tables" of axis labels and values;
+    real FSR tables are structured rows of text.
+    """
+    header = " ".join(str(cell) for cell in table[0])
+    if _CHART_REF.search(title) or _CHART_REF.search(header):
+        return "chart reference in title/header"
+
+    lines: list[str] = []
+    for row in table:
+        for cell in row:
+            for ln in str(cell).split("\n"):
+                if ln.strip():
+                    lines.append(ln.strip())
+    if not lines:
+        return None
+
+    numeric = sum(1 for ln in lines if _NUMERIC_LINE.match(ln) and re.search(r"\d", ln))
+    if numeric / len(lines) > _CHART_NUMERIC_LINE_RATIO:
+        return f"{numeric}/{len(lines)} numeric-only lines"
+
+    for ln in lines:
+        if _TICK_CONSECUTIVE.search(ln) or _TICK_SPACED.match(ln):
+            return f"axis tick pattern in {ln[:40]!r}"
+    return None
+
+
 def _extract_tables(
     pl_page: pdfplumber.page.Page,
     page_num: int,
@@ -157,9 +196,18 @@ def _extract_tables(
             [str(cell) if cell is not None else "" for cell in row]
             for row in raw
         ]
+        title = _find_table_title(pl_page, tbl_obj.bbox)
+        chart_reason = _chart_reason(normalized, title)
+        if chart_reason:
+            logger.warning(
+                "Skipping chart misdetected as table on page %d of %s: %s",
+                page_num, doc_name, chart_reason,
+            )
+            continue
+
         tables.append(normalized)
         bboxes.append(tbl_obj.bbox)
-        titles.append(_find_table_title(pl_page, tbl_obj.bbox))
+        titles.append(title)
 
     return tables, titles, bboxes
 

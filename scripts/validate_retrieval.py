@@ -21,6 +21,10 @@ no_retrieval queries are skipped for metrics (summary entry is null).
 Metrics match on (source_document, page_number) — the five corpus PDFs
 share page numbers, so page alone is ambiguous.
 
+P@5 is normalized by the number of relevant (doc, page) pairs (at most 5):
+a query whose single answer page is found in the top 5 scores 1.0. Plain
+hits/5 would cap a perfect single-page query at 0.2.
+
 Usage:
     python scripts/validate_retrieval.py
     python scripts/validate_retrieval.py --config config/settings.yaml
@@ -68,8 +72,14 @@ def _git_commit() -> str:
 
 
 def _precision_at_k(pages: list[tuple[str, int]], relevant: set[tuple[str, int]], k: int) -> float:
+    # Normalized precision: fraction of the query's relevant (doc, page) pairs
+    # (at most k) found in the top k. A full hit is 1.0 regardless of how many
+    # pages the query is grounded on — plain hits/k is capped by |relevant|/k.
+    if not relevant:
+        return 0.0
     top = pages[:k]
-    return sum(1 for p in top if p in relevant) / k if k else 0.0
+    hits = sum(1 for p in top if p in relevant)
+    return hits / min(len(relevant), k)
 
 
 def _recall_at_k(pages: list[tuple[str, int]], relevant: set[tuple[str, int]], k: int) -> float:

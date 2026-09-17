@@ -6,6 +6,7 @@ from src.ingestion.parser import (
     _is_header_footer_pattern,
     _overlaps_table,
     _extract_text,
+    _chart_reason,
 )
 from src.ingestion.chunker import (
     _chunk_text,
@@ -115,6 +116,60 @@ def test_overlaps_table_small_overlap_below_threshold():
 
 def test_overlaps_table_empty_list():
     assert _overlaps_table((0.0, 0.0, 100.0, 100.0), []) is False
+
+
+def test_chart_reason_chart_reference_in_header():
+    table = [
+        ["Distribution of interest rate changes Chart 2.1.1", ""],
+        ["30\n25\n20", "10\n5\n0"],
+        ["Deutsche Bundesbank", ""],
+    ]
+    assert _chart_reason(table, "") is not None
+
+
+def test_chart_reason_chart_reference_in_title():
+    table = [["Real estate prices Chart 2.1.5", ""], ["180\n160\n140", "100\n80"]]
+    assert _chart_reason(table, "") is not None
+    # title-only reference (chart caption above the box)
+    assert _chart_reason([["x", "y"], ["a", "b"]], "Real estate prices Chart 2.1.5") is not None
+
+
+def test_chart_reason_numeric_lines():
+    # Mostly bare axis values, a few label lines (SVB metrics chart)
+    table = [
+        ["Selected metrics for SVB Financial Group", ""],
+        ["US$ billion\nSecurities portfolio\n200\n150\n100\n50\n0", "Interest income\n2.3\n2.0\n1.7\n1.4\n2020 2021 2022"],
+        ["Source: SVB quarterly reports.", ""],
+    ]
+    assert _chart_reason(table, "") is not None
+
+
+def test_chart_reason_axis_ticks():
+    table = [
+        ["Interest rate fixation periods", ""],
+        ["% \n100\n90\n80\n70", "200405060708091011121314151617181920212223"],
+        ["Deutsche Bundesbank", ""],
+    ]
+    assert _chart_reason(table, "") is not None
+
+
+def test_chart_reason_real_table_kept():
+    table = [
+        ["NGFS scenario vintage", "2021 analysis", "2023 analysis"],
+        ["Analytical goals", "Estimate losses in portfolios", "Estimate losses and gauge resilience"],
+        ["Application of climate scenarios", "Banking sector only", "Banking and insurance sectors"],
+    ]
+    assert _chart_reason(table, "Main changes to the analytical framework Table 3.1") is None
+
+
+def test_chart_reason_small_real_table_with_numbers_kept():
+    # Meta-analysis table: numeric cells but text in every row
+    table = [
+        ["Outcome variable", "Sample size", "Uncorrected effect", "Evidence for bias", "Bias-corrected effect"],
+        ["Housing credit growth", "1,140", "-0.0005", "Very strong", "-0.0369***"],
+        ["", "927", "-0.0098", "Strong", ""],
+    ]
+    assert _chart_reason(table, "") is None
 
 
 def test_chunk_text_short_text_single_chunk(enc):

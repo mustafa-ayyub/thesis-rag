@@ -432,14 +432,12 @@
     "query_type": "simple_factual",
     "question": "By approximately how much did households' aggregate debt-to-disposable-income ratio change in Germany during the course of 2025 thus far, and what level did it reach?",
     "ground_truth": "Over the course of 2025 thus far, the ratio between aggregate household debt and household disposable income decreased by approximately 0.5 percentage point to around 85%. The main reason was the continued low level of new lending. Nominal wage growth, which was significantly lower in 2025 than in previous years, played a smaller dampening role than before.",
-    "source_page": "Pages 53-54",
+    "source_page": "Page 53",
     "ground_truth_pages": [
-      53,
-      54
+      53
     ],
     "contexts": [
-      "In the course of 2025 thus far, the ratio between aggregate household debt and household disposable income decreased by approximately 0.5 percentage point to around 85%. The main reason for this was the continued low level of new lending. In previous years, the debt ratio had also been dampened by marked nominal wage growth, but this was significantly lower in 2025. Nevertheless, the rise in nominal wages over recent years has resulted in a reduction of household debt in real terms.",
-      "For most households, interest rate risk remains low for the time being. The risks associated with follow-up financing appear limited, as most interest rate fixation periods are long. By 2027, around 20% of the outstanding volume of residential real estate loans will have to be renewed. The interest rates on these types of loans could increase from around 2.5% at present to more than 4% through renewal."
+      "In the course of 2025 thus far, the ratio between aggregate household debt and household disposable income decreased by approximately 0.5 percentage point to around 85%. The main reason for this was the continued low level of new lending. In previous years, the debt ratio had also been dampened by marked nominal wage growth, but this was significantly lower in 2025. Nevertheless, the rise in nominal wages over recent years has resulted in a reduction of household debt in real terms."
     ],
     "source_document": "Bundesbank-Financial-Stability-Review-2025.pdf"
   },
@@ -588,10 +586,9 @@
     "query_type": "multi_step",
     "question": "The Bundesbank assessed risks to Germany from AI adoption in the financial sector, noting both financial stability concerns and regulatory safeguards. What specific systemic risk could arise if large parts of the financial system use AI models trained on similar datasets, what two EU regulations were cited as providing limits on AI autonomy in decisions about individuals, and what additional concentration risk could arise from the structure of AI system provision?",
     "ground_truth": "If AI models trained on similar datasets are adopted on a large scale, this could lead to increasingly herd-like behaviour among financial intermediaries, amplifying excesses in financial markets and increasing volatility. New concentration risks could also arise if large sections of the financial system depend on the products of a few AI system providers. The two EU regulations cited as imposing limits on AI autonomy in decisions about individuals are the EU Artificial Intelligence Act (AI Act) and the EU General Data Protection Regulation (GDPR).",
-    "source_page": "Pages 33, 34",
+    "source_page": "Page 33",
     "ground_truth_pages": [
-      33,
-      34
+      33
     ],
     "contexts": [
       "If AI systems were to be adopted on a larger scale to make decisions on lending or investments in financial markets, it could both mitigate and heighten risks. The use of AI models that have been trained on similar datasets could lead to increasingly herd-like behaviour. This could amplify excesses in financial markets and increase volatility. In Europe, the EU Artificial Intelligence Act (AI Act) and the EU General Data Protection Regulation (GDPR) impose limits on the degree of autonomy permitted to AI models when it comes to decisions about individuals.",
@@ -809,10 +806,11 @@
     "query_type": "multi_step",
     "question": "The ECB's special feature on population ageing linked demographic trends to sovereign fiscal sustainability. What two mechanisms explain why higher old-age dependency ratios are associated with higher interest rate-growth differentials, and what combination of spending and revenue pressures could lead to persistently high fiscal deficits?",
     "ground_truth": "Higher dependency ratios are associated with higher interest rate-growth differentials due to two factors: first, the anticipated rise in future debt levels elevates default risks and drives up the interest rates governments must pay; second, the slowing economic growth observed in ageing populations reduces the growth side of the differential. On the fiscal side, a growing number of retirees implies rising ageing-related spending on pensions, health care and long-term care, while a shrinking working-age population results in lower personal income tax revenues and lower social security contributions. This combination of expenditure and revenue pressures could lead to persistently high fiscal deficits that threaten fiscal sustainability.",
-    "source_page": "Pages 115, 116",
+    "source_page": "Pages 115-117",
     "ground_truth_pages": [
       115,
-      116
+      116,
+      117
     ],
     "contexts": [
       "Population ageing poses significant fiscal challenges for euro area sovereigns via higher ageing-related costs and a shrinking tax base. On the one hand, a growing number of retirees implies ageing-related spending rising from levels which are already high, including on pensions, health care and long-term care. On the other hand, a shrinking working-age population may result in lower personal income tax revenues and lower social security contributions.",
@@ -997,9 +995,9 @@
     "query_type": "multi_step",
     "question": "The ECB's special feature on corporate credit risk found that rising insolvencies have not broadly fed through into higher NPL ratios. What role did NPL outflows play in keeping NPL ratios stable, and what early warning indicator in Germany and France may signal delayed recognition of credit deterioration?",
     "ground_truth": "Significant NPL outflows — driven by bank-internal workouts, cures, sales of non-performing and/or still-performing but risky portfolios, risk transfers through securitisations and forbearance — have contributed to lower inflows and faster NPL turnover than in the past, reducing net NPL flows. This has helped keep NPL ratios stable despite rising insolvencies. As an early warning indicator, still-performing forborne loans for German and French significant institutions have increased markedly since the pandemic, potentially pointing to delayed recognition of credit deterioration.",
-    "source_page": "Pages 108, 110",
+    "source_page": "Pages 109, 110",
     "ground_truth_pages": [
-      108,
+      109,
       110
     ],
     "contexts": [
@@ -1282,14 +1280,12 @@
     "edge_case_type": "ambiguous",
     "question": "When the Bundesbank 2025 Financial Stability Review describes the German banking system's 'overall risk situation' as having 'deteriorated in the past year on balance', which specific risk category had improved and which had worsened?",
     "ground_truth": "According to the Bundesbank's 2025 Financial Stability Review, the overall risk situation for the German banking system deteriorated in the past year on balance because the risk of credit defaults had risen continuously in a weak economic environment, with banks increasing their loan loss allowances and risks in commercial real estate financing remaining elevated. However, interest rate risk on banks' balance sheets had continued to decline — specifically, the large unrealised losses on interest-bearing securities had unwound almost completely overall.",
-    "source_page": "Bundesbank FSR 2025, Pages 62-63",
+    "source_page": "Bundesbank FSR 2025, Page 62",
     "ground_truth_pages": [
-      62,
-      63
+      62
     ],
     "contexts": [
-      "The overall risk situation for the German banking system has deteriorated in the past year on balance. In a weak economic environment, the risk of credit defaults has risen continuously. Banks have increased their loan loss allowances. In addition, surveys by the ifo Institute suggest that enterprises view banks' lending behaviour as increasingly restrictive. In the financing of commercial real estate, risks remain elevated and could lead to further loss allowances in the loan portfolio. By contrast, interest rate risk on banks' balance sheets, as presented in earlier financial stability reviews, has continued to decline. For example, the large, unrealised (hidden) losses on interest-bearing securities have unwound almost completely overall, not least because prices have recovered.",
-      "The non-performing loans ratio has risen significantly from its low at the end of 2022. Most of this increase was due to loans to the real estate sector at first. Now non-performing loans are increasing more broadly due to the weakness in economic activity."
+      "The overall risk situation for the German banking system has deteriorated in the past year on balance. In a weak economic environment, the risk of credit defaults has risen continuously. Banks have increased their loan loss allowances. In addition, surveys by the ifo Institute suggest that enterprises view banks' lending behaviour as increasingly restrictive. In the financing of commercial real estate, risks remain elevated and could lead to further loss allowances in the loan portfolio. By contrast, interest rate risk on banks' balance sheets, as presented in earlier financial stability reviews, has continued to decline. For example, the large, unrealised (hidden) losses on interest-bearing securities have unwound almost completely overall, not least because prices have recovered."
     ],
     "sources": [
       "Bundesbank-Financial-Stability-Review-2025.txt"

@@ -19,9 +19,11 @@ data/documents/
 data/results/
 data/chunks_export.json
 data/vectors.json
+data/pages_txt/
 
 # Claude project instructions — local only
 CLAUDE.md
+PROJECT_CONTEXT.md
 
 # Local docs — not versioned
 docs/
