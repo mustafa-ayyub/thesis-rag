@@ -1,7 +1,6 @@
 import logging
 
-import httpx
-
+from src.retrieval.remote_post import post_with_retry
 from src.settings import Settings
 from src.types import RetrievedChunk, ScoredChunk
 
@@ -88,12 +87,9 @@ class Reranker:
             ],
             "top_n": top_n,
         }
-        resp = httpx.post(
-            f"{self._remote_url}/rerank",
-            json=payload,
-            timeout=60.0,
+        resp = post_with_retry(
+            f"{self._remote_url}/rerank", payload, timeout=60.0
         )
-        resp.raise_for_status()
         return [
             RetrievedChunk(
                 chunk_id=candidates[item["index"]].chunk_id,

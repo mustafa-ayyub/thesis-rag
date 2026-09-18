@@ -172,3 +172,60 @@ def test_query_rewriter_gives_up_after_max_attempts():
 
     assert mock_client.chat.completions.create.call_count == 5
     assert mock_sleep.call_count == 4
+
+
+def test_post_with_retry_succeeds_after_transient_failures(monkeypatch):
+    import httpx
+    from src.retrieval import remote_post
+
+    calls = {"n": 0}
+
+    def fake_post(url, json=None, timeout=None):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            raise httpx.ReadTimeout("blip")
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.raise_for_status = MagicMock()
+        return resp
+
+    monkeypatch.setattr(remote_post.httpx, "post", fake_post)
+    monkeypatch.setattr(remote_post.time, "sleep", lambda s: None)
+    resp = remote_post.post_with_retry("http://x/embed", {"text": "q"}, timeout=1.0)
+    assert resp.status_code == 200
+    assert calls["n"] == 3
+
+
+def test_post_with_retry_raises_after_exhaustion(monkeypatch):
+    import httpx
+    from src.retrieval import remote_post
+
+    def fake_post(url, json=None, timeout=None):
+        raise httpx.ConnectError("down")
+
+    monkeypatch.setattr(remote_post.httpx, "post", fake_post)
+    monkeypatch.setattr(remote_post.time, "sleep", lambda s: None)
+    with pytest.raises(httpx.ConnectError):
+        remote_post.post_with_retry("http://x/embed", {"text": "q"}, timeout=1.0)
+
+
+def test_post_with_retry_no_retry_on_4xx(monkeypatch):
+    import httpx
+    from src.retrieval import remote_post
+
+    calls = {"n": 0}
+
+    def fake_post(url, json=None, timeout=None):
+        calls["n"] += 1
+        resp = MagicMock()
+        resp.status_code = 400
+        resp.raise_for_status.side_effect = httpx.HTTPStatusError(
+            "400", request=MagicMock(), response=resp
+        )
+        return resp
+
+    monkeypatch.setattr(remote_post.httpx, "post", fake_post)
+    monkeypatch.setattr(remote_post.time, "sleep", lambda s: None)
+    with pytest.raises(httpx.HTTPStatusError):
+        remote_post.post_with_retry("http://x/embed", {"text": "q"}, timeout=1.0)
+    assert calls["n"] == 1

@@ -72,24 +72,21 @@ Matching is on **(document, page)** pairs, not page alone — the corpus PDFs
 share page numbers, so a page number is only meaningful together with its
 document.
 
-**Current baseline** (2026-09-15, single-pass retrieval over the frozen
-pipeline):
+**Current baseline** (2026-09-18, single-pass retrieval over the frozen
+pipeline, after the ground-truth page audit and chart-filter re-index):
 
 | Type | P@5 | R@10 | nDCG@10 | MRR |
 |---|---|---|---|---|
-| simple_factual (26) | 0.865 | 0.923 | 0.836 | 0.862 |
-| multi_step (39) | 0.650 | 0.778 | 0.613 | 0.625 |
-| edge_cases (15) | 0.750 | 0.750 | 0.601 | 0.683 |
-| pooled (80) | 0.739 | 0.820 | 0.683 | 0.713 |
+| simple_factual (26) | 0.846 | 0.923 | 0.842 | 0.873 |
+| multi_step (39) | 0.705 | 0.829 | 0.655 | 0.675 |
+| edge_cases (15) | 0.767 | 0.767 | 0.608 | 0.611 |
+| pooled (80) | 0.762 | 0.848 | 0.707 | 0.727 |
 
-Run-to-run variance is ±0.03 at type level (LLM rewrite stochasticity). Six
-queries (Q004, Q008, Q012, Q033, Q036, Q076) are stable all-zero retrieval
-misses — the expected target set where System B's multi-pass retrieval is
-hypothesized to help.
-
-The baseline run predates two subsequent corrections (ground-truth page audit
-and chart-filter re-index); the reference baseline is re-recorded after the
-re-indexed corpus is validated.
+Runs are highly reproducible with the current rewriter prompt (two
+consecutive runs differ by ≤0.02 at type level; 75/80 rewrites identical).
+Five queries (Q008, Q012, Q014, Q070, Q076) score zero in the baseline run;
+Q008, Q012, and Q076 are stable misses across rewriter variants — the target
+set where System B's multi-pass retrieval is hypothesized to help.
 
 ## Setup
 

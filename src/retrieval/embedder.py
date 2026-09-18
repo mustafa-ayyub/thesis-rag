@@ -1,7 +1,6 @@
 import logging
 
-import httpx
-
+from src.retrieval.remote_post import post_with_retry
 from src.settings import Settings
 from src.types import ScoredChunk, RetrievedChunk
 
@@ -89,24 +88,18 @@ class Embedder:
         return results
 
     def _embed_remote(self, query: str) -> tuple[DenseVector, SparseVector]:
-        resp = httpx.post(
-            f"{self._remote_url}/embed",
-            json={"text": query},
-            timeout=30.0,
+        resp = post_with_retry(
+            f"{self._remote_url}/embed", {"text": query}, timeout=30.0
         )
-        resp.raise_for_status()
         data = resp.json()
         return data["dense"], {int(k): float(v) for k, v in data["sparse"].items()}
 
     def _embed_batch_remote(
         self, texts: list[str]
     ) -> list[tuple[DenseVector, SparseVector]]:
-        resp = httpx.post(
-            f"{self._remote_url}/embed_batch",
-            json={"texts": texts},
-            timeout=300.0,
+        resp = post_with_retry(
+            f"{self._remote_url}/embed_batch", {"texts": texts}, timeout=300.0
         )
-        resp.raise_for_status()
         return [
             (item["dense"], {int(k): float(v) for k, v in item["sparse"].items()})
             for item in resp.json()["results"]

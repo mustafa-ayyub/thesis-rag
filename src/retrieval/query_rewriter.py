@@ -16,6 +16,11 @@ logger = logging.getLogger(__name__)
 REWRITER_SYSTEM_PROMPT = (
     "You are a search query optimizer for financial stability report retrieval. "
     "Rewrite the user's question as a concise, keyword-rich search query. "
+    "Keep the core entities, metrics, and time references. Preserve technical "
+    "terms and abbreviations exactly as given (e.g. NPL, CET1, LCR), and keep "
+    "quoted phrases verbatim. For multi-part questions, prioritize the terms "
+    "that identify the answer passage — do not pad with every minor sub-topic. "
+    "Do not add words that are not in the question. "
     "Output only the rewritten query. No explanation. No punctuation at the end."
 )
 
