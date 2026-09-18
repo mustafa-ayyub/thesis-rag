@@ -1,0 +1,28 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.14.1
+    volumes:
+      - qdrant-data:/qdrant/storage
+    ports:
+      - "6333:6333"
+
+  app:
+    build: .
+    image: thesis-rag-app
+    env_file:
+      - .env
+    environment:
+      QDRANT_HOST: qdrant
+    extra_hosts:
+      # lets the container reach services on the host (e.g. an SSH tunnel
+      # to a GPU server bound to host port 8000)
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    # no default command — run explicitly, e.g.:
+    #   docker compose run --rm app python scripts/ingest.py --vectors-file data/vectors.json
+    #   docker compose run --rm app python scripts/validate_retrieval.py
+
+volumes:
+  qdrant-data:
