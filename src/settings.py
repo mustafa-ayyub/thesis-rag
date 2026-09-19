@@ -30,6 +30,10 @@ class SaiaSettings(BaseSettings):
     max_tokens: int = 2048
     rewriter_max_tokens: int = 300
     request_interval_seconds: float = 3.0
+    # Safety margins below SAIA's official 30/min, 200/hour, 1000/day limits
+    rate_limit_per_minute: int = 28
+    rate_limit_per_hour: int = 180
+    rate_limit_per_day: int = 900
 
 
 class RetrievalSettings(BaseModel):
@@ -55,6 +59,24 @@ class DataSettings(BaseModel):
     results_dir: str = "data/results/retrieval"
 
 
+class EvaluationSettings(BaseModel):
+    system_a_results_dir: str = "data/results/system_a"
+    answers_filename: str = "answers.jsonl"
+    ragas_scores_filename: str = "ragas_scores.json"
+    evaluation_final_filename: str = "evaluation_final.json"
+    runs_per_query: int = 3
+    generation_pace_seconds: float = 10.0
+    generator_retry_attempts: int = 5
+    generator_retry_wait_seconds: float = 30.0
+    generator_min_answer_chars: int = 15
+    ragas_pace_seconds: float = 3.0
+    ragas_retry_attempts: int = 3
+    ragas_retry_base_seconds: float = 10.0
+    ragas_strictness: int = 3
+    ragas_timeout_seconds: float = 300.0
+    ragas_max_tokens: int = 4096
+
+
 class Settings(BaseModel):
     gpu: GpuSettings = GpuSettings()
     models: ModelSettings = ModelSettings()
@@ -62,6 +84,7 @@ class Settings(BaseModel):
     retrieval: RetrievalSettings = RetrievalSettings()
     qdrant: QdrantSettings = QdrantSettings()
     data: DataSettings = DataSettings()
+    evaluation: EvaluationSettings = EvaluationSettings()
 
 
 def load_settings(config_path: str = "config/settings.yaml") -> Settings:
