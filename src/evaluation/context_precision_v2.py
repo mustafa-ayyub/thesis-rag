@@ -57,6 +57,26 @@ def _snap_verdict(value: float) -> float:
     return nearest
 
 
+def _json_array_candidates(text: str) -> list[object]:
+    candidates: list[object] = []
+    for match in re.finditer(r"\[[^\[\]]*\]", text):
+        try:
+            value = json.loads(match.group(0))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(value, list):
+            candidates.append(value)
+    return candidates
+
+
+def _find_verdicts(text: str, expected_count: int) -> object:
+    candidates = _json_array_candidates(text)
+    for candidate in candidates:
+        if len(candidate) == expected_count:
+            return candidate
+    return candidates[0] if candidates else None
+
+
 def _extract_verdicts(content: str, expected_count: int) -> list[float]:
     if content is None:
         raise ValueError("Empty judge response")
@@ -69,15 +89,17 @@ def _extract_verdicts(content: str, expected_count: int) -> list[float]:
     values: object = None
     try:
         payload = json.loads(text)
-        if isinstance(payload, dict) and "verdicts" in payload:
-            values = payload["verdicts"]
+        if isinstance(payload, dict):
+            values = payload.get("verdicts")
         else:
             values = payload
     except json.JSONDecodeError:
-        match = re.search(r"\[.*\]", text, flags=re.DOTALL)
-        if not match:
-            raise
-        values = json.loads(match.group(0))
+        values = None
+
+    if values is None:
+        values = _find_verdicts(text, expected_count)
+        if values is None:
+            raise ValueError("No JSON verdict array found")
 
     if not isinstance(values, list) or len(values) != expected_count:
         raise ValueError(f"Expected {expected_count} verdicts")
@@ -124,7 +146,7 @@ class PartialCreditContextPrecision:
                 response = self._client.chat.completions.create(
                     model=self._cfg.saia.model,
                     temperature=self._cfg.saia.temperature,
-                    max_tokens=200,
+                    max_tokens=self._cfg.evaluation.ragas_max_tokens,
                     messages=[
                         {"role": "system", "content": SYSTEM_PROMPT},
                         {"role": "user", "content": user_prompt},

@@ -69,7 +69,13 @@ def main() -> None:
         ):
             continue
 
-        record = first_runs[query_id]
+        record = first_runs.get(query_id)
+        if record is None:
+            logger.warning(
+                "Skipping %s: no run 1 answer record found",
+                query_id,
+            )
+            continue
         contexts = [
             (
                 f"{chunk['doc_name']}, p.{chunk['page_number']}",

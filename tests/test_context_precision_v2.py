@@ -60,3 +60,23 @@ def test_extract_verdicts_rejects_out_of_range_value():
 def test_extract_verdicts_rejects_missing_content():
     with pytest.raises(ValueError):
         _extract_verdicts(None, 1)
+
+
+def test_extract_verdicts_ignores_trailing_square_brackets():
+    content = '{"verdicts": [1.0, 0.5, 0.0]} [note]'
+    assert _extract_verdicts(content, 3) == [1.0, 0.5, 0.0]
+
+
+def test_extract_verdicts_finds_expected_array_with_extra_brackets():
+    content = "Result [1] is [1.0, 0.5, 0.0]. Extra [2] [3]"
+    assert _extract_verdicts(content, 3) == [1.0, 0.5, 0.0]
+
+
+def test_extract_verdicts_json_array_with_trailing_text():
+    content = "[1.0, 0.5] done [note]"
+    assert _extract_verdicts(content, 2) == [1.0, 0.5]
+
+
+def test_extract_verdicts_rejects_text_without_json_array():
+    with pytest.raises(ValueError):
+        _extract_verdicts("no json array here", 2)
