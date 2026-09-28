@@ -144,7 +144,7 @@ ssh u29661@glogin-gpu.hpc.gwdg.de 'tail -20 ~/thesis-rag/logs/<jobname>_<ID>.err
 Job names: `batch_embed` (batch job), `gpu_server` (interactive job).
 
 Success for a batch job = last line of `.out` says
-`Wrote 749 vectors → data/vectors.json` (number = your chunk count).
+`Wrote <N> vectors → data/vectors.json` (current corpus: 731 chunks).
 
 ### E. Get notified instead of watching (run in a laptop terminal)
 
