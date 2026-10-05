@@ -12,7 +12,7 @@ pipeline — only the control layer differs:
 
 | System | Description | Status |
 |---|---|---|
-| **System A** | Standard RAG — fixed single-pass retrieval, one LLM call | in progress (Month 3) |
+| **System A** | Standard RAG — fixed single-pass retrieval, one LLM call | complete (Month 3) |
 | **System B** | MCP-Wrapped RAG — ReAct agent, self-correcting retrieval via MCP tool | planned (Month 4) |
 
 **Research question:** How does wrapping a RAG pipeline as an MCP tool affect
@@ -88,6 +88,43 @@ Five queries (Q008, Q012, Q014, Q070, Q076) score zero in the baseline run;
 Q008, Q012, and Q076 are stable misses across rewriter variants — the target
 set where System B's multi-pass retrieval is hypothesized to help.
 
+## System A evaluation (Month 3)
+
+Month 3 adds the single-pass System A pipeline and RAGAS evaluation.
+
+System A uses the frozen retrieval pipeline exactly once, then generates one answer from the retrieved top-5 chunks.
+
+```bash
+# Generate answers for all 95 queries × 3 runs
+python scripts/evaluate_system_a.py --phase generate
+
+# Score the 80 retrievable queries with RAGAS
+python scripts/evaluate_system_a.py --phase score
+
+# Merge answers + RAGAS scores into the final v1 output
+python scripts/evaluate_system_a.py --phase merge
+
+# Optional: create partial-credit context precision v2 from the same answers
+python scripts/rescore_context_precision_v2.py
+```
+
+Generation and RAGAS scoring need SAIA access, Qdrant, and a GPU session for the BGE models. The optional v2 rescore only re-judges `context_precision` from the saved answers and retrieved chunks.
+
+Evaluation outputs are written to `data/results/system_a/` and are gitignored:
+
+```text
+answers.jsonl                # 95 × 3 = 285 answer records
+ragas_scores.json            # vanilla RAGAS v1
+evaluation_final.json        # merged v1 result
+ragas_scores_v2.json         # partial-credit context precision v2
+evaluation_final_v2.json     # merged v2 result
+context_precision_v2.json    # per-query v2 verdicts
+```
+
+The 15 `no_retrieval` queries are generated and recorded, but excluded from RAGAS summary metrics.
+
+v2 only changes `context_precision`; all other v1 metrics remain unchanged.
+
 ## Setup
 
 ```bash
@@ -133,10 +170,13 @@ the parser and chunker render individual pages.
 ```
 src/ingestion/   — PDF parsing, chunking, Qdrant indexing
 src/retrieval/   — embedding, hybrid search, reranking, query rewriting
+src/systems/     — System A single-pass RAG pipeline
+src/evaluation/  — RAGAS scoring, evaluation runner, v2 context precision
+src/saia_rate_limiter.py — client-side SAIA sliding-window limiter
 cluster/         — GPU server (FastAPI) and SLURM scripts for GWDG
-scripts/         — ingest, validation, and utility entry points
+scripts/         — ingest, validation, evaluation, and utility entry points
 tests/           — pytest suite
-docs/            — design documents (chunking strategy, code standards)
+docs/            — design documents and local month logs (gitignored)
 config/          — settings.yaml
 data/            — documents, queries, results (mostly gitignored)
 ```
@@ -196,5 +236,5 @@ Notes:
 |---|---|
 | `main` | stable releases only |
 | `month-2/shared-retrieval-pipeline` | Month 2 — shared ingestion + retrieval pipeline |
-| `month-3/system-a-b` | Month 3 — System A and System B |
-| `month-4/evaluation` | Month 4 — RAGAS evaluation and analysis |
+| `month-3/system-a-single-pass-rag` | Month 3 — System A single-pass RAG + RAGAS evaluation |
+| Month 4 branch | Month 4 — System B MCP-wrapped RAG (branch not created yet) |

@@ -20,6 +20,10 @@ saia:
   rewriter_max_tokens: 300
   # SAIA allows 30 req/min — 3s spacing keeps a 95-query run at ~20 req/min
   request_interval_seconds: 3
+  # Client-side safety margins below SAIA's official 30/min, 200/hour, 1000/day limits
+  rate_limit_per_minute: 28
+  rate_limit_per_hour: 180
+  rate_limit_per_day: 900
 
 retrieval:
   chunk_size_tokens: 512
@@ -40,3 +44,20 @@ data:
   documents_dir: "data/documents"
   queries_path: "data/queries/queries.json"
   results_dir: "data/results/retrieval"
+
+evaluation:
+  system_a_results_dir: "data/results/system_a"
+  answers_filename: "answers.jsonl"
+  ragas_scores_filename: "ragas_scores.json"
+  evaluation_final_filename: "evaluation_final.json"
+  runs_per_query: 3
+  generation_pace_seconds: 10
+  generator_retry_attempts: 5
+  generator_retry_wait_seconds: 30
+  generator_min_answer_chars: 15
+  ragas_pace_seconds: 3
+  ragas_retry_attempts: 3
+  ragas_retry_base_seconds: 10
+  ragas_strictness: 3
+  ragas_timeout_seconds: 300
+  ragas_max_tokens: 4096
