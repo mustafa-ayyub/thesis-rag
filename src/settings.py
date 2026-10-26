@@ -77,6 +77,25 @@ class EvaluationSettings(BaseModel):
     ragas_max_tokens: int = 4096
 
 
+class SystemBSettings(BaseModel):
+    results_dir: str = "data/results/system_b"
+    answers_filename: str = "answers.jsonl"
+    ragas_scores_filename: str = "ragas_scores.json"
+    evaluation_final_filename: str = "evaluation_final.json"
+    runs_per_query: int = 3
+    max_retrieval_calls: int = 3
+    max_final_chunks: int = 5
+    agent_max_tokens: int = 800
+    agent_retry_attempts: int = 3
+    agent_retry_base_seconds: float = 10.0
+    mcp_retry_attempts: int = 3
+    mcp_retry_wait_seconds: float = 2.0
+    generation_pace_seconds: float = 10.0
+    generator_retry_attempts: int = 5
+    generator_retry_wait_seconds: float = 30.0
+    generator_min_answer_chars: int = 15
+
+
 class Settings(BaseModel):
     gpu: GpuSettings = GpuSettings()
     models: ModelSettings = ModelSettings()
@@ -85,6 +104,7 @@ class Settings(BaseModel):
     qdrant: QdrantSettings = QdrantSettings()
     data: DataSettings = DataSettings()
     evaluation: EvaluationSettings = EvaluationSettings()
+    system_b: SystemBSettings = SystemBSettings()
 
 
 def load_settings(config_path: str = "config/settings.yaml") -> Settings:

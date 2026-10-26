@@ -61,3 +61,21 @@ evaluation:
   ragas_strictness: 3
   ragas_timeout_seconds: 300
   ragas_max_tokens: 4096
+
+system_b:
+  results_dir: "data/results/system_b"
+  answers_filename: "answers.jsonl"
+  ragas_scores_filename: "ragas_scores.json"
+  evaluation_final_filename: "evaluation_final.json"
+  runs_per_query: 3
+  max_retrieval_calls: 3
+  max_final_chunks: 5
+  agent_max_tokens: 800
+  agent_retry_attempts: 3
+  agent_retry_base_seconds: 10
+  mcp_retry_attempts: 3
+  mcp_retry_wait_seconds: 2
+  generation_pace_seconds: 10
+  generator_retry_attempts: 5
+  generator_retry_wait_seconds: 30
+  generator_min_answer_chars: 15

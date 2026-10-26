@@ -20,6 +20,7 @@ data/results/
 data/chunks_export.json
 data/vectors.json
 data/pages_txt/
+thesis_deliverables/
 
 # Claude project instructions — local only
 CLAUDE.md
