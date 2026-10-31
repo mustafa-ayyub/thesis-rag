@@ -8,6 +8,7 @@ from pathlib import Path
 from pydantic import BaseModel, ConfigDict
 
 from src.evaluation.ragas_scorer import RagasScorer, RagasScores, ScoringSample
+from src.evaluation.spaced_rate_limiter import SpacedRateLimiter
 from src.saia_rate_limiter import SaiaRateLimiter
 from src.settings import Settings
 from src.types import RetrievedChunk
@@ -97,6 +98,11 @@ class EvaluationRunnerBase:
         scorer: RagasScorer | None = None
 
         for query in queries:
+            if self._budget_exhausted():
+                logger.info(
+                    "Session SAIA budget reached; stopping score cleanly — resume next session"
+                )
+                return
             if query.query_type == "no_retrieval":
                 scores[query.query_id] = None
                 self._save_ragas_scores(scores)
@@ -111,7 +117,13 @@ class EvaluationRunnerBase:
             record = first_runs[query.query_id]
 
             if scorer is None:
-                scorer = RagasScorer(self._cfg, self._rate_limiter)
+                # RAGAS fires its per-metric judge calls in a parallel burst;
+                # use a min-interval limiter (separate from the generate
+                # limiter) so the burst stays under SAIA's 2-per-10s cap.
+                scorer = RagasScorer(
+                    self._cfg,
+                    SpacedRateLimiter.from_settings(self._cfg),
+                )
 
             sample = ScoringSample(
                 query_id=query.query_id,
@@ -124,6 +136,10 @@ class EvaluationRunnerBase:
             scores[query.query_id] = result
             self._save_ragas_scores(scores)
             logger.info("Scored %s: %s", query.query_id, result.model_dump())
+
+    def _budget_exhausted(self) -> bool:
+        """Whether a per-session SAIA budget (if configured) is exhausted."""
+        return False
 
     def merge(self) -> None:
         queries = self._load_queries()

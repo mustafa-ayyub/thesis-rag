@@ -72,6 +72,7 @@ class SystemBAgent:
         self._client = client or AsyncOpenAI(
             api_key=cfg.saia.api_key,
             base_url=cfg.saia.base_url,
+            timeout=cfg.saia.timeout_seconds,
         )
 
     async def decide(

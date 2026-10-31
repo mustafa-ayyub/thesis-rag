@@ -35,3 +35,28 @@ def test_agent_decision_allows_empty_selection_for_stop():
     decision = AgentDecision(decision="stop", reason="not answerable")
 
     assert decision.selected_evidence_ids == []
+
+
+def test_agent_decision_coerces_string_list_fields():
+    # The agent occasionally emits a single string (or null) where a list is
+    # expected; it must be coerced rather than rejected (regression for Q093).
+    decision = AgentDecision(
+        covered="The evidence pool covers covered bonds.",
+        missing="",
+        decision="stop",
+        reason="no_retrieval",
+        selected_evidence_ids="E1",
+    )
+
+    assert decision.covered == ["The evidence pool covers covered bonds."]
+    assert decision.missing == []
+    assert decision.selected_evidence_ids == ["E1"]
+
+
+def test_agent_decision_coerces_null_list_fields():
+    decision = AgentDecision.model_validate(
+        {"covered": None, "missing": None, "decision": "stop"}
+    )
+
+    assert decision.covered == []
+    assert decision.missing == []

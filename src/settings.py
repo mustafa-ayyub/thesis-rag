@@ -30,10 +30,17 @@ class SaiaSettings(BaseSettings):
     max_tokens: int = 2048
     rewriter_max_tokens: int = 300
     request_interval_seconds: float = 3.0
-    # Safety margins below SAIA's official 30/min, 200/hour, 1000/day limits
+    # Cap a hung SAIA call (shared-backend queueing) at 240 s instead of the
+    # OpenAI client's 600 s default, so a stalled request fails fast and the
+    # existing retry loop recovers instead of burning ~10 min per hung call.
+    timeout_seconds: float = 240.0
+    # Daily cap for the SAIA limiter. SAIA's REAL daily limit is 400 (confirmed via
+    # 429s 2026-10-27; NOT 1000). The client window counts every acquire() — 429
+    # retries AND the per-retrieval proxy permit — so it inflates above accepted calls.
+    # 450 lets a full day of answers fit while the 429 rate keeps accepted calls under 400.
     rate_limit_per_minute: int = 28
     rate_limit_per_hour: int = 180
-    rate_limit_per_day: int = 900
+    rate_limit_per_day: int = 450
 
 
 class RetrievalSettings(BaseModel):
@@ -70,6 +77,7 @@ class EvaluationSettings(BaseModel):
     generator_retry_wait_seconds: float = 30.0
     generator_min_answer_chars: int = 15
     ragas_pace_seconds: float = 3.0
+    ragas_min_interval_seconds: float = 11.0
     ragas_retry_attempts: int = 3
     ragas_retry_base_seconds: float = 10.0
     ragas_strictness: int = 3
@@ -94,6 +102,7 @@ class SystemBSettings(BaseModel):
     generator_retry_attempts: int = 5
     generator_retry_wait_seconds: float = 30.0
     generator_min_answer_chars: int = 15
+    max_saia_calls_per_session: int = 800
 
 
 class Settings(BaseModel):

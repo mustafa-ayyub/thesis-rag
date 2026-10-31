@@ -20,10 +20,19 @@ saia:
   rewriter_max_tokens: 300
   # SAIA allows 30 req/min — 3s spacing keeps a 95-query run at ~20 req/min
   request_interval_seconds: 3
-  # Client-side safety margins below SAIA's official 30/min, 200/hour, 1000/day limits
+  # Cap a hung SAIA call (shared-backend queueing) at 240 s instead of the
+  # OpenAI client's 600 s default so a stalled request fails fast + retries
+  timeout_seconds: 240
+  # Client-side daily cap for the SAIA limiter. SAIA's REAL daily limit is 400
+  # (confirmed via 429s 2026-10-27; NOT 1000). The client window counts EVERY
+  # acquire() — including 429 retries AND the per-retrieval proxy permit (the rewriter
+  # runs in the MCP server subprocess) — so it inflates above the number of *accepted*
+  # SAIA calls. We set 450 (not a tight margin under 400) so a full day of answers fits
+  # despite that inflation, while the 429-retry rate keeps actual accepted calls
+  # (~275-340) safely under SAIA's 400.
   rate_limit_per_minute: 28
   rate_limit_per_hour: 180
-  rate_limit_per_day: 900
+  rate_limit_per_day: 450
 
 retrieval:
   chunk_size_tokens: 512
@@ -56,6 +65,7 @@ evaluation:
   generator_retry_wait_seconds: 30
   generator_min_answer_chars: 15
   ragas_pace_seconds: 3
+  ragas_min_interval_seconds: 11
   ragas_retry_attempts: 3
   ragas_retry_base_seconds: 10
   ragas_strictness: 3
@@ -79,3 +89,4 @@ system_b:
   generator_retry_attempts: 5
   generator_retry_wait_seconds: 30
   generator_min_answer_chars: 15
+  max_saia_calls_per_session: 800

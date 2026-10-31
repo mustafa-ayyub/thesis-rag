@@ -35,4 +35,5 @@ ssh -N \
     -J "${GWDG_USER}@${LOGIN_NODE}" \
     -o ServerAliveInterval=15 \
     -o ServerAliveCountMax=3 \
+    -o StrictHostKeyChecking=accept-new \
     "${GWDG_USER}@${NODE}"

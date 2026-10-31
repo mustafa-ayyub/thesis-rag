@@ -2,14 +2,18 @@ import json
 from pathlib import Path
 from unittest.mock import patch
 
+import httpx
 import pytest
+from openai import InternalServerError
 
 from src.evaluation.ragas_scorer import RagasScores
 from src.evaluation.runner_system_b import (
     SystemBAnswerRecord,
     SystemBEvaluationRunner,
 )
+from src.saia_rate_limiter import SaiaRateLimiter
 from src.settings import Settings, SystemBSettings
+from src.systems.system_b.session_limiter import SessionLimiter
 from src.systems.system_b.types import (
     RetrievalCallRecord,
     SystemBResult,
@@ -67,11 +71,13 @@ def _system_b_result(question: str, latency_ms: int = 123) -> SystemBResult:
 
 
 class FakePipeline:
-    def __init__(self) -> None:
+    def __init__(self, limiter: "SaiaRateLimiter | None" = None) -> None:
         self.started = False
         self.closed = False
         self.questions: list[str] = []
         self.fail_after: int | None = None
+        self.fail_with: Exception | None = None
+        self.limiter = limiter
 
     async def start(self) -> None:
         self.started = True
@@ -81,9 +87,18 @@ class FakePipeline:
 
     async def run(self, question: str) -> SystemBResult:
         self.questions.append(question)
+        if self.limiter is not None:
+            self.limiter.acquire()
         if self.fail_after is not None and len(self.questions) > self.fail_after:
+            if self.fail_with is not None:
+                raise self.fail_with
             raise RuntimeError("pipeline exploded")
         return _system_b_result(question)
+
+
+def _saia_transient() -> InternalServerError:
+    resp = httpx.Response(503, request=httpx.Request("POST", "https://saia.test/v1"))
+    return InternalServerError("503 Service Unavailable", response=resp, body={"error": "service down"})
 
 
 def _answer_record(
@@ -204,11 +219,37 @@ def test_generate_closes_pipeline_on_error(tmp_path, monkeypatch):
     fake_pipeline.fail_after = 1
     monkeypatch.setattr(runner, "_get_pipeline", lambda: fake_pipeline)
 
-    with pytest.raises(RuntimeError, match="pipeline exploded"):
-        runner.generate()
+    # A non-transient per-query failure is skipped (not raised); the run keeps
+    # going and the pipeline is still closed in finally.
+    runner.generate()
 
     assert fake_pipeline.started
     assert fake_pipeline.closed
+    # only the first run succeeded; every later run raised and was skipped
+    answers = tmp_path / "results" / "answers.jsonl"
+    assert len([l for l in answers.read_text().splitlines() if l.strip()]) == 1
+
+
+def test_generate_stops_cleanly_on_saia_transient_error(tmp_path, monkeypatch):
+    _write_queries(tmp_path)
+    cfg = _cfg(tmp_path)
+
+    runner = SystemBEvaluationRunner(cfg)
+    fake_pipeline = FakePipeline()
+    fake_pipeline.fail_after = 0
+    fake_pipeline.fail_with = _saia_transient()
+    monkeypatch.setattr(runner, "_get_pipeline", lambda: fake_pipeline)
+
+    # A transient SAIA failure stops the whole session cleanly (no raise, no
+    # further attempts hammering a down backend).
+    runner.generate()
+
+    assert fake_pipeline.started
+    assert fake_pipeline.closed
+    # stopped on the very first transient failure
+    assert len(fake_pipeline.questions) == 1
+    answers = tmp_path / "results" / "answers.jsonl"
+    assert not answers.exists() or not answers.read_text().strip()
 
 
 def test_generate_no_pipeline_when_all_runs_present(tmp_path, monkeypatch):
@@ -368,3 +409,38 @@ def test_load_answer_records_reports_invalid_line(tmp_path):
     runner = SystemBEvaluationRunner(cfg)
     with pytest.raises(ValueError, match="line 1"):
         runner._load_answer_records()
+
+
+def test_generate_stops_before_start_when_budget_exhausted(tmp_path, monkeypatch):
+    _write_queries(tmp_path)
+    cfg = _cfg(tmp_path)
+    cfg.system_b.max_saia_calls_per_session = 0
+    runner = SystemBEvaluationRunner(cfg)
+    fake_pipeline = FakePipeline()
+    monkeypatch.setattr(runner, "_get_pipeline", lambda: fake_pipeline)
+
+    runner.generate()
+
+    assert fake_pipeline.questions == []
+    assert not fake_pipeline.started
+    assert runner._load_answer_records() == []
+
+
+def test_generate_stops_mid_run_when_session_budget_exhausted(tmp_path, monkeypatch):
+    _write_queries(tmp_path)
+    cfg = _cfg(tmp_path)
+    cfg.system_b.max_saia_calls_per_session = 2
+    limiter = SessionLimiter(1000, 1000, 1000)
+    runner = SystemBEvaluationRunner(cfg, rate_limiter=limiter)
+    fake_pipeline = FakePipeline(limiter=limiter)
+    monkeypatch.setattr(runner, "_get_pipeline", lambda: fake_pipeline)
+
+    runner.generate()
+
+    # 2 queries x 3 runs = 6 potential runs; the budget caps at 2 SAIA calls.
+    assert len(fake_pipeline.questions) == 2
+    assert limiter.calls_made == 2
+    records = runner._load_answer_records()
+    assert len(records) == 2
+    assert (records[0].query_id, records[0].run) == ("Q001", 1)
+    assert (records[1].query_id, records[1].run) == ("Q001", 2)

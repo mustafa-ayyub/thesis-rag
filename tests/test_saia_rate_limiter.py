@@ -10,7 +10,7 @@ def test_from_settings_uses_saia_safety_limits():
     limiter = SaiaRateLimiter.from_settings(cfg)
     assert limiter._per_minute == 28
     assert limiter._per_hour == 180
-    assert limiter._per_day == 900
+    assert limiter._per_day == 450
 
 
 def test_acquire_records_calls():

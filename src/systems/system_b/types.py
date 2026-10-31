@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.types import RetrievedChunk
 
@@ -21,6 +21,18 @@ class AgentDecision(BaseModel):
     next_query: str | None = None
     selected_evidence_ids: list[str] = Field(default_factory=list)
     reason: str = ""
+
+    @field_validator("covered", "missing", "selected_evidence_ids", mode="before")
+    @classmethod
+    def _coerce_str_to_list(cls, v):
+        # The agent occasionally emits a single string (or null) where a list is
+        # expected; coerce it so an otherwise-valid decision isn't rejected.
+        if v is None:
+            return []
+        if isinstance(v, str):
+            v = v.strip()
+            return [v] if v else []
+        return v
 
     @model_validator(mode="after")
     def validate_decision(self) -> "AgentDecision":
