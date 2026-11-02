@@ -125,6 +125,38 @@ The 15 `no_retrieval` queries are generated and recorded, but excluded from RAGA
 
 v2 only changes `context_precision`; all other v1 metrics remain unchanged.
 
+## System B evaluation (Month 4)
+
+Month 4 adds System B: the same frozen retrieval pipeline wrapped as a real MCP
+tool (FastMCP, stdio) that a ReAct-style agent (SAIA `qwen3.8-27b`) drives with up
+to 3 retrieval calls. The agent dedupes retrieved chunks into an evidence pool and
+selects at most 5 chunks for the final answer, which is generated with the same
+prompt and rules as System A. Only the control layer differs.
+
+```bash
+# Generate answers for all 95 queries × 3 runs (one MCP server session per phase)
+python scripts/evaluate_system_b.py --phase generate
+
+# Score the 80 retrievable queries with RAGAS (contexts = agent's final chunks)
+python scripts/evaluate_system_b.py --phase score
+
+# Merge answers + RAGAS scores into the final v1 output
+python scripts/evaluate_system_b.py --phase merge
+
+# Partial-credit context precision v2 from the same answers
+python scripts/rescore_context_precision_v2.py --system b
+```
+
+Outputs are written to `data/results/system_b/` with the same file layout as
+`data/results/system_a/`. Generation additionally records per-retrieval-call detail
+(query, new/duplicate evidence, latency), the SAIA call count, and any fallback
+warnings, which support the agent-behavior analysis in the thesis.
+
+System B makes up to 7 SAIA calls per answer (agent decisions + the rewriter calls
+inside the frozen retriever + final generation); all calls go through the shared
+sliding-window rate limiter, so a full evaluation spans multiple days at the
+900/day safety window.
+
 ## Setup
 
 ```bash
@@ -170,8 +202,8 @@ the parser and chunker render individual pages.
 ```
 src/ingestion/   — PDF parsing, chunking, Qdrant indexing
 src/retrieval/   — embedding, hybrid search, reranking, query rewriting
-src/systems/     — System A single-pass RAG pipeline
-src/evaluation/  — RAGAS scoring, evaluation runner, v2 context precision
+src/systems/     — System A single-pass RAG; System B MCP-wrapped RAG (agent + MCP tool)
+src/evaluation/  — RAGAS scoring, shared + per-system runners, v2 context precision
 src/saia_rate_limiter.py — client-side SAIA sliding-window limiter
 cluster/         — GPU server (FastAPI) and SLURM scripts for GWDG
 scripts/         — ingest, validation, evaluation, and utility entry points
@@ -234,7 +266,7 @@ Notes:
 
 | Branch | Scope |
 |---|---|
-| `main` | stable releases only |
-| `month-2/shared-retrieval-pipeline` | Month 2 — shared ingestion + retrieval pipeline |
-| `month-3/system-a-single-pass-rag` | Month 3 — System A single-pass RAG + RAGAS evaluation |
-| Month 4 branch | Month 4 — System B MCP-wrapped RAG (branch not created yet) |
+| `main` | current integrated line; includes Month 2 and Month 3 |
+| `month-2/shared-retrieval-pipeline` | Month 2 — historical feature branch |
+| `month-3/system-a-single-pass-rag` | Month 3 — System A single-pass RAG + RAGAS evaluation; merged into `main` via PR #2 |
+| `month-4/system-b-mcp-rag` | Month 4 — System B MCP-wrapped RAG |

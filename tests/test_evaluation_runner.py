@@ -136,7 +136,7 @@ def test_score_uses_first_run_and_records_no_retrieval_as_null(
     )
     monkeypatch.setattr("src.evaluation.runner.time.sleep", lambda _seconds: None)
 
-    with patch("src.evaluation.runner.RagasScorer") as mock_scorer_cls:
+    with patch("src.evaluation.runner_base.RagasScorer") as mock_scorer_cls:
         mock_scorer = mock_scorer_cls.return_value
         mock_scorer.score.return_value = RagasScores(
             faithfulness=1.0,
