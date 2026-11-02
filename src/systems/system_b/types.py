@@ -25,9 +25,10 @@ class AgentDecision(BaseModel):
     @field_validator("covered", "missing", "selected_evidence_ids", mode="before")
     @classmethod
     def _coerce_str_to_list(cls, v):
-        # The agent occasionally emits a single string (or null) where a list is
-        # expected; coerce it so an otherwise-valid decision isn't rejected.
-        if v is None:
+        # The agent occasionally emits a single string, null, or a boolean where
+        # a list is expected (e.g. "covered": false for a general-knowledge
+        # question); coerce it so an otherwise-valid decision isn't rejected.
+        if v is None or isinstance(v, bool):
             return []
         if isinstance(v, str):
             v = v.strip()

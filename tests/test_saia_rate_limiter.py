@@ -87,3 +87,42 @@ def test_acquire_async_uses_async_sleep(monkeypatch):
 
     assert sleeps == [1.0]
     assert len(limiter._minute_calls) == 2
+
+
+def test_accumulated_wait_zero_when_no_wait():
+    limiter = SaiaRateLimiter(10, 10, 10)
+    limiter.acquire()
+    assert limiter.accumulated_wait_ms == 0.0
+
+
+def test_accumulated_wait_tracks_sleep(monkeypatch):
+    limiter = SaiaRateLimiter(1, 100, 100)
+    limiter.acquire()
+
+    sleeps: list[float] = []
+    monkeypatch.setattr(time, "sleep", sleeps.append)
+    monkeypatch.setattr(
+        limiter,
+        "_wait_seconds_locked",
+        lambda: 1.5 if not sleeps else 0.0,
+    )
+
+    limiter.acquire()
+
+    # the 1.5s rate-limit wait is recorded (in ms); the productive call is not
+    assert limiter.accumulated_wait_ms == 1500.0
+
+
+def test_reset_wait_zeroes_counter(monkeypatch):
+    limiter = SaiaRateLimiter(1, 100, 100)
+    limiter.acquire()
+    sleeps: list[float] = []
+    monkeypatch.setattr(time, "sleep", sleeps.append)
+    monkeypatch.setattr(
+        limiter, "_wait_seconds_locked", lambda: 2.0 if not sleeps else 0.0
+    )
+    limiter.acquire()
+    assert limiter.accumulated_wait_ms == 2000.0
+
+    limiter.reset_wait()
+    assert limiter.accumulated_wait_ms == 0.0

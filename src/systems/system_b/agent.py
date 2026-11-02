@@ -19,11 +19,13 @@ logger = logging.getLogger(__name__)
 
 AGENT_SYSTEM_PROMPT = (
     "You are a retrieval agent for financial stability reports.\n"
-    "Decide whether the current evidence pool is sufficient or whether one more targeted retrieval is needed.\n"
+    "First decide whether the question can be answered from general financial knowledge or whether it needs specific information from the financial stability reports.\n"
+    "If it is a general definition, concept, or standard financial principle (for example what a covered bond, LCR, or NPL is) that does NOT require specific figures, named banks, particular years, or findings from the reports, set decision to \"stop\" immediately and do NOT retrieve; the final answer will be given from general knowledge.\n"
+    "Otherwise, decide whether the current evidence pool is sufficient or whether one more targeted retrieval is needed.\n"
     "Return JSON only with fields: covered, missing, decision, next_query, selected_evidence_ids, reason.\n"
     "Use decision \"retrieve_more\" only when a different query can plausibly find missing information.\n"
-    "Use decision \"stop\" when the evidence is sufficient or no useful query remains.\n"
-    "When stopping, selected_evidence_ids contains the evidence IDs needed for the final answer, ordered by importance.\n"
+    "Use decision \"stop\" when the evidence is sufficient, no useful query remains, or the question is a general definition/concept.\n"
+    "When stopping on a report-specific question, selected_evidence_ids lists the evidence IDs needed for the final answer in order of importance; when answering from general knowledge, leave selected_evidence_ids empty.\n"
     "Never repeat a previous retrieval query."
 )
 

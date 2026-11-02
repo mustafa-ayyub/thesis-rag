@@ -60,3 +60,15 @@ def test_agent_decision_coerces_null_list_fields():
 
     assert decision.covered == []
     assert decision.missing == []
+
+
+def test_agent_decision_coerces_bool_list_fields():
+    # The agent occasionally emits a boolean where a list is expected
+    # (e.g. "covered": false for a general-knowledge question); it must be
+    # coerced to an empty list rather than rejected.
+    decision = AgentDecision.model_validate(
+        {"covered": False, "missing": True, "decision": "stop"}
+    )
+
+    assert decision.covered == []
+    assert decision.missing == []

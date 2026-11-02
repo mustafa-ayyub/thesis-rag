@@ -29,6 +29,10 @@ class SaiaRateLimiter:
         self._hour_calls: deque[float] = deque()
         self._day_calls: deque[float] = deque()
         self._lock = threading.Lock()
+        # Cumulative time spent sleeping for rate-limit waits. Used by the
+        # clean-latency measurement to subtract artificial waits from the
+        # end-to-end wall time. Does not affect limiting behaviour.
+        self._wait_accumulated_s = 0.0
 
     @classmethod
     def from_settings(cls, cfg: Settings) -> "SaiaRateLimiter":
@@ -45,6 +49,7 @@ class SaiaRateLimiter:
                 if wait_s <= 0:
                     self._record_call_locked()
                     return
+                self._wait_accumulated_s += wait_s
             logger.debug("SAIA rate limiter waiting %.1fs", wait_s)
             time.sleep(wait_s)
 
@@ -55,8 +60,20 @@ class SaiaRateLimiter:
                 if wait_s <= 0:
                     self._record_call_locked()
                     return
+                self._wait_accumulated_s += wait_s
             logger.debug("SAIA rate limiter waiting %.1fs", wait_s)
             await asyncio.sleep(wait_s)
+
+    def reset_wait(self) -> None:
+        """Zero the cumulative wait counter (call before a timed run)."""
+        with self._lock:
+            self._wait_accumulated_s = 0.0
+
+    @property
+    def accumulated_wait_ms(self) -> float:
+        """Total rate-limit sleep time since the last reset, in milliseconds."""
+        with self._lock:
+            return self._wait_accumulated_s * 1000.0
 
     def _wait_seconds_locked(self) -> float:
         now = time.monotonic()
