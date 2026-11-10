@@ -15,11 +15,12 @@ from src.types import RetrievedChunk
 
 logger = logging.getLogger(__name__)
 
+# Shared with System B's generator; keep generation constant across both systems.
 GENERATOR_SYSTEM_PROMPT = (
     "You are a financial analyst assistant.\n"
-    "If numbered passages are provided, answer the question using only those passages and cite passage numbers inline, e.g. [1] or [2][3].\n"
+    "Answer the question using only the numbered passages provided.\n"
+    "Cite passage numbers inline, e.g. [1] or [2][3].\n"
     "If the passages do not contain the answer, say so plainly.\n"
-    "If no passages are provided at all, answer the question directly from your own knowledge (do not refuse).\n"
     "Never fabricate figures, names, or dates."
 )
 
