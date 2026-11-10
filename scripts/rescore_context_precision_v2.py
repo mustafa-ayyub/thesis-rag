@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Rescore System A context precision with partial credit and write v2 outputs."""
+"""Rescore context precision with partial credit and write v2 outputs.
+
+Usage:
+    python scripts/rescore_context_precision_v2.py --system a
+    python scripts/rescore_context_precision_v2.py --system b
+"""
 import argparse
 import json
 import logging
@@ -14,27 +19,44 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def _system_paths(cfg, system: str) -> tuple[Path, str, str]:
+    if system == "a":
+        section = cfg.evaluation
+        return (
+            Path(section.system_a_results_dir),
+            section.answers_filename,
+            section.ragas_scores_filename,
+        )
+    section = cfg.system_b
+    return (
+        Path(section.results_dir),
+        section.answers_filename,
+        section.ragas_scores_filename,
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Create partial-credit context precision v2 for System A."
+        description="Create partial-credit context precision v2 outputs."
     )
+    parser.add_argument("--system", choices=("a", "b"), default="a")
     parser.add_argument("--config", default="config/settings.yaml")
     args = parser.parse_args()
 
     sys.path.insert(0, str(Path(__file__).parent.parent))
     from src.evaluation.context_precision_v2 import PartialCreditContextPrecision
     from src.evaluation.ragas_scorer import RagasScores
-    from src.evaluation.runner import EvaluationRunner
     from src.saia_rate_limiter import SaiaRateLimiter
     from src.settings import load_settings
 
     cfg = load_settings(args.config)
-    results_dir = Path(cfg.evaluation.system_a_results_dir)
-    answers_path = results_dir / cfg.evaluation.answers_filename
-    scores_v1_path = results_dir / cfg.evaluation.ragas_scores_filename
+    results_dir, answers_filename, scores_filename = _system_paths(cfg, args.system)
+    answers_path = results_dir / answers_filename
+    scores_v1_path = results_dir / scores_filename
     scores_v2_path = results_dir / "ragas_scores_v2.json"
     intermediate_path = results_dir / "context_precision_v2.json"
     final_v2_path = results_dir / "evaluation_final_v2.json"
+    chunks_key = "retrieved_chunks" if args.system == "a" else "final_chunks"
 
     queries = json.loads(Path(cfg.data.queries_path).read_text(encoding="utf-8"))
     first_runs: dict[str, dict] = {}
@@ -81,7 +103,7 @@ def main() -> None:
                 f"{chunk['doc_name']}, p.{chunk['page_number']}",
                 chunk["text"],
             )
-            for chunk in record["retrieved_chunks"]
+            for chunk in record[chunks_key]
         ]
         score, verdicts = scorer.score(
             question=record["question"],
@@ -116,7 +138,11 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    runner = EvaluationRunner(cfg)
+    if args.system == "a":
+        from src.evaluation.runner import EvaluationRunner as Runner
+    else:
+        from src.evaluation.runner_system_b import SystemBEvaluationRunner as Runner
+    runner = Runner(cfg)
     runner._ragas_scores_path = scores_v2_path
     runner._final_path = final_v2_path
     runner.merge()

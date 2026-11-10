@@ -14,7 +14,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
-#SBATCH --gres=gpu:1g.20gb:1
+#SBATCH --gres=gpu:2g.20gb:1
 #SBATCH --time=06:00:00
 #SBATCH --output=logs/gpu_server_%j.out
 #SBATCH --error=logs/gpu_server_%j.err

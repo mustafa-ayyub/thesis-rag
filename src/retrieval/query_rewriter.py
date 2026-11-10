@@ -42,6 +42,7 @@ class QueryRewriter:
         self._client = OpenAI(
             api_key=cfg.saia.api_key,
             base_url=cfg.saia.base_url,
+            timeout=cfg.saia.timeout_seconds,
         )
         self._cache: dict[str, str] = {}
 
